@@ -70,7 +70,7 @@ export class DrugSubstitutionComponent implements OnInit {
   onSelectDrug() {
     for (let i = 0; i < this.dataLength; i++) {
       if (this.searchData[i]['_id'] == this.selectedDrug) {
-        this.old_brand_name = this.old_brand_name.concat(this.searchData[i]['did']);
+        this.old_brand_name = this.old_brand_name.concat(this.searchData[i]['_id']);
         this.selectedDrugsData.push(this.searchData[i]);
       };
     };
@@ -79,6 +79,33 @@ export class DrugSubstitutionComponent implements OnInit {
   removeDrug(index) {
     this.selectedDrugsData.splice(index, 1);
     this.old_brand_name.splice(index, 1);
+  };
+
+  onSearchClick() {
+
+    let data = {
+      new_drug: this.newSelectedDrugData['_id'],
+      old_drugs: this.old_brand_name,
+    };
+
+    if (this.newSelectedDrugData != null && this.old_brand_name) {
+      this.spin = true;
+    }
+
+
+    this.substituteService.substituteResult(data).subscribe(res => {
+      this.substituteResult = res;
+      // console.log(this.substituteResult);
+      this.spin = false;
+
+      if (res.interactions == '') {
+        this.noInteractionFound = true;
+      }
+      else {
+        this.interactionFound = true;
+      }
+    });
+
   };
 
 }

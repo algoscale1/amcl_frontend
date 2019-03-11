@@ -74,14 +74,10 @@
         </mat-expansion-panel-header>
 
         <div class="substitute">
-          <mat-list *ngFor="let substitute of substituteResult.substitute ">
+          <mat-list *ngFor="let substitute of substituteResult.subtitute ">
             <mat-list-item> (Ndc: {{ substitute.ndc }}) {{ substitute.brand_name }} </mat-list-item>
           </mat-list>
         </div>
-
-        <!-- <mat-action-row>
-              <button mat-button color="primary" (click)="nextStep()">Next</button>
-            </mat-action-row> -->
 
       </mat-expansion-panel>
 

@@ -14,14 +14,7 @@ export class AddPatientService {
 
   addPatient(data) {
 
-    const httpOption = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
-      })
-    };
-
-    return this.http.post(`${environment.API_url}/patient/create`, data, httpOption).pipe(
+    return this.http.post(`${environment.API_url}/patient/create`, data).pipe(
       map(res => true),
       catchError((err) => {
         return throwError(err.error);

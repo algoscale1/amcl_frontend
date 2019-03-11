@@ -95,7 +95,7 @@ export class AddPatientComponent implements OnInit {
           data: 'Patient Added!'
         });
 
-        this.router.navigate(['/review_list']);
+        this.router.navigate(['/community']);
       },
       err => { }
     )

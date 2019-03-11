@@ -55,22 +55,11 @@
 
       </mat-expansion-panel>
 
-      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+      <!-- <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
 
         <mat-expansion-panel-header style="background-color: rgb(71, 37, 223);">
           Common Side Effects
         </mat-expansion-panel-header>
-
-        <!-- <mat-list>
-              <mat-list-item>Common Side Effects : <div style="color:red" *ngIf="!drugData.common_side_effect">&nbsp;No
-                  Common Side Effects</div>
-              </mat-list-item>
-              <p>{{ drugData.common_side_effect }}</p>
-              <mat-list-item>Side Effects(in more detail) : <div style="color:red" *ngIf="!drugData.side_effect">&nbsp;No
-                  Side Effects</div>
-              </mat-list-item>
-              <p>{{ drugData.side_effect }}</p>
-            </mat-list> -->
         <mat-list>
           <mat-list-item *ngFor="let effects of drugData.common_side_effect">{{ effects }}</mat-list-item>
           <mat-list-item *ngIf="drugData.common_side_effect == ''" style="color:red">No Common side effects
@@ -101,7 +90,7 @@
           <button mat-button color="primary" (click)="nextStep()">Next</button>
         </mat-action-row>
 
-      </mat-expansion-panel>
+      </mat-expansion-panel> -->
 
       <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
         <mat-expansion-panel-header style="background-color: rgb(236, 138, 81);">

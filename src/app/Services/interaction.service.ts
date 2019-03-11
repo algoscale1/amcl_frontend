@@ -11,9 +11,9 @@ export class InteractionService {
 
   constructor(private http: HttpClient) { }
 
-  interationResult(data) {
+  interationResult(data?) {
 
-    return this.http.get(`${environment.API_url}`, data).pipe(
+    return this.http.get(`${environment.API_url}/drug/get/new/int`, { params: data }).pipe(
       map(res => res['data'])
     )
   }

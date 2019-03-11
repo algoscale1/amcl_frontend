@@ -1,4 +1,4 @@
-<div class="review">
+<div class="review-wrapper">
   <div class="col-md-12 row">
     <div class="col-md-6">
       <h3 class="title">Initiate a review :</h3>
@@ -12,6 +12,16 @@
       <mat-radio-group>
         <mat-radio-button value="emr">EMR</mat-radio-button>&nbsp;
         <mat-radio-button value="manual" checked>Manual</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div class="col-md-9 review-block">
+    <div class="review col-md-12" style="padding:0px 0px 15px 0px">
+      <label>Is the patient present :</label>
+      <mat-radio-group>
+        <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
+        <mat-radio-button value="no">No</mat-radio-button>
       </mat-radio-group>
     </div>
   </div>

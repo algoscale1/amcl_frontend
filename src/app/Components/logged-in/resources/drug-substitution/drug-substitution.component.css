@@ -19,6 +19,5 @@ mat-chip{
 }
 
 .substitute{
-    height: 400px !important;
     overflow: auto !important;
 }

@@ -55,7 +55,7 @@ export class DrugInteractionComponent implements OnInit {
   onSelectDrug() {
     for (let i = 0; i < this.dataLength; i++) {
       if (this.searchData[i]['_id'] == this.selectedDrug) {
-        this.brand_name = this.brand_name.concat(this.searchData[i]['did']);
+        this.brand_name = this.brand_name.concat(this.searchData[i]['_id']);
         this.selectedDrugsData.push(this.searchData[i]);
       };
     };
@@ -70,8 +70,9 @@ export class DrugInteractionComponent implements OnInit {
 
     if (this.brand_name.length > 1) {
       let data = {
-        indication_id: this.brand_name
+        drugs: this.brand_name
       };
+      console.log(data)
 
       this.intractionService.interationResult(data).subscribe(res => {
         this.interactionData = res;

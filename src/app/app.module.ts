@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RatingModule } from "ngx-rating";
@@ -40,6 +40,7 @@ import { FoodInteractionComponent } from './Components/logged-in/resources/food-
 import { ErrorComponent } from './Components/log-in/error/error.component';
 import { AccountComponent } from './Components/logged-in/account/account.component';
 import { PatientReviewComponent } from './Components/logged-in/med-review/patient-review/patient-review.component';
+import { TokenInterceptor } from './Authentication/interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,13 @@ import { PatientReviewComponent } from './Components/logged-in/med-review/patien
       "startFromZero": false,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   entryComponents: [ErrorComponent],
   bootstrap: [AppComponent]
 })
