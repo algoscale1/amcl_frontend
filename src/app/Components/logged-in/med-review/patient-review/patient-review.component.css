@@ -1,0 +1,19 @@
+.review{
+    padding: 20px;
+}
+
+.title{
+    color: black;
+    display: inline;
+    margin-right: 15px;
+}
+
+.review-block{
+    border-radius: 5px;
+    padding: 25px 20px 25px 30px;
+    background: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left:4%;
+    margin-right: 30px;
+}

@@ -1,0 +1,13 @@
+.noIntFound{
+    padding: 25px;
+    color: blue;
+}
+
+.min2, .intFound{
+    padding: 25px;
+    color: red;    
+}
+
+mat-chip{
+   color: red !important;
+}

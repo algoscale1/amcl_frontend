@@ -1,0 +1,56 @@
+<div class="wrapper">
+  <div class="drug-search-body col-md-5">
+    <div class="search-title">
+      <h4>Search for Drug Interactions</h4>
+    </div>
+    <div class="search-body">
+      <div class="form-group">
+        <label>Look for Drug Name</label>
+        <input type="text" class="form-control" placeholder="Search Drug" (keyup)="onSearch()" [(ngModel)]="searchInput"
+          required>
+      </div>
+      <div class="form-group">
+        <label>Number of Drug to choose from <span id="number_of_drugs" class="badge badge-pill badge-success">{{
+                dataLength }}</span>
+        </label>
+        <mat-form-field style="display: block;">
+          <mat-select placeholder="Drugs" [(ngModel)]="selectedDrug" (ngModelChange)="onSelectDrug()">
+            <mat-option *ngFor="let data of searchData" value="{{ data._id }}">( ndc: {{data.ndc}} )
+              {{ data.brand_name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-list>
+          <mat-list-item *ngFor="let drug of selectedDrugsData; let last=last; let i=index">
+            ( Ndc: {{drug.ndc}} ) {{ drug.brand_name }}
+            <button mat-icon-button style="margin-left: 40px;" (click)="removeDrug(i)">
+              <mat-icon class="example-icon">delete</mat-icon>
+            </button>
+            <mat-divider *ngIf="!last"></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="form-group search-btn">
+        <button class="btn btn-success" (click)="onSearchClick()">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" *ngIf="interactionFound">
+
+    <mat-card class="intFound" *ngFor="let data of interactionData; let i=index">
+      <mat-chip-list>
+        <mat-chip>Severity :{{ data.severity }}</mat-chip>
+      </mat-chip-list>
+      Interaction Found Between ( {{ data.drug1.brand_name }} ) & ( {{ data.drug2.brand_name }} )
+    </mat-card>
+
+  </div>
+  <div class="col-md-6" *ngIf="noInteractionFound">
+    <mat-card class="noIntFound">No Interaction Found</mat-card>
+  </div>
+  <div class="col-md-6" *ngIf="min2">
+    <mat-card class="min2">Please Select Atleast 2 drugs</mat-card>
+  </div>
+
+</div>

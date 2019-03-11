@@ -1,0 +1,24 @@
+.noIntFound{
+    padding: 25px;
+    color: blue;
+}
+
+.intFound{
+    padding: 25px;
+    color: red;    
+}
+
+mat-chip{
+   color: red !important;
+}
+
+.spin{
+    padding: 50px;
+    justify-content: center;
+    display: flex;
+}
+
+.substitute{
+    height: 400px !important;
+    overflow: auto !important;
+}

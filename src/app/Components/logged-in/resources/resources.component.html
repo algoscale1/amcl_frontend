@@ -1,0 +1,26 @@
+<div class="resource-body">
+  <div class="resources">
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="Search Drug">
+        <ng-template matTabContent>
+          <app-drug-info></app-drug-info>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Drug Interactions">
+        <ng-template matTabContent>
+          <app-drug-interaction></app-drug-interaction>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Drug Substitution">
+        <ng-template matTabContent>
+          <app-drug-substitution></app-drug-substitution>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Food/Alcohol/Caffeine-Drug Interaction">
+        <ng-template matTabContent>
+          <app-food-interaction></app-food-interaction>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

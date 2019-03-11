@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <div>
+    <h3 class="title">General patient information</h3>
+    <hr>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="patientForm">
+      <div class="col-md-12 row" style="margin:0px;">
+        <div class="col-md-8 register-body">
+          <div class="row">
+            <div class="col-md-5">
+              <mat-form-field class="input">
+                <input matInput placeholder="First Name" formControlName="fname">
+                <!-- <mat-placeholder class="placeholder">First Name</mat-placeholder> -->
+              </mat-form-field>
+            </div>
+            <div class="col-md-5">
+              <mat-form-field>
+                <input matInput placeholder="Last Name" formControlName="lname">
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <mat-form-field>
+                <mat-select placeholder="Gender" formControlName="gender">
+                  <mat-option *ngFor="let gender of gender" [value]="gender.value">{{gender.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <mat-form-field>
+                <input matInput placeholder="Weight(lbs)" formControlName="weight">
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <mat-select placeholder="Height(ft.)" formControlName="heightFt">
+                  <mat-option *ngFor="let ft of ft" [value]="ft.value">{{ ft.value }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <mat-select placeholder="Height(inch.)" formControlName="heightIn">
+                  <mat-option *ngFor="let inch of inch" [value]="inch.value">{{ inch.value }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <mat-select placeholder="Marital Status" formControlName="marital_status">
+                  <mat-option *ngFor="let marital of marital" [value]="marital.value">{{marital.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="address">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Mailing Address" formControlName="mailing_address">
+          </mat-form-field>
+          <label>Is Billing address different than Mailing address?&nbsp;</label>
+          <mat-radio-group (change)="ChangBillingAddress()" formControlName="billAddChange">
+            <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field>
+            <input matInput placeholder="Billing Address" [readonly]="!billingAdd" formControlName="biling_address">
+          </mat-form-field>
+          <div class="button">
+            <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="profile-block col-md-9">
+            <img [src]="url" id="profile" class="patient-img">
+            <div class="image">
+              <input type="file" name="pic" accept="image/*" (changeer)=newProfile($event)>
+            </div>
+            <div class="patient-profile col-md-12">
+              <div class="row">
+                <h4>Mary Brown</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 profile-completion">
+            <h3>Profile Completion</h3>
+            <circle-progress [percent]="70" [radius]="60" title={{profile_comp}} [outerStrokeWidth]="15"
+              [innerStrokeWidth]="15" [outerStrokeColor]="'#00D9AF'" [innerStrokeColor]="'#e7e8ea'" [animation]="true"
+              [animationDuration]="500" space="-15" outerStrokeLinecap="square" titleFontSize="40">
+            </circle-progress>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

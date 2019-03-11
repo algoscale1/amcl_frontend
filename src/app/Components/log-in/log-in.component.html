@@ -1,0 +1,27 @@
+<div class="register-page">
+  <div class="register-body">
+    <h2 class="title">Login</h2>
+    <div class="login-data">
+      <form [formGroup]="signInForm">
+        <mat-form-field>
+          <input matInput type="email" placeholder="Type your Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Type your Password" formControlName="password">
+        </mat-form-field>
+        <div class="text-right">
+          <a routerLink='/'>Forgot password?</a>
+        </div>
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" [disabled]="!signInForm.valid" (click)="onSubmit()">Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="signUpbtn col-md-12">
+    <a routerLink="/register">Sign up for an account</a>
+  </div>
+</div>
