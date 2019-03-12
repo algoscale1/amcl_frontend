@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AddPatientService {
+export class PatientService {
 
   constructor(private http: HttpClient) { }
 
@@ -22,4 +22,25 @@ export class AddPatientService {
     )
 
   };
+
+  getPatientList() {
+
+    return this.http.get(`${environment.API_url}/patient/get`).pipe(
+      map(res => res['data'])
+    )
+  }
+
+  getPatient(id) {
+    return this.http.get(`${environment.API_url}/patient/get/${id}`).pipe(
+      map(res => res['data'])
+    )
+  };
+
+  updatePatient(id, data) {
+
+    return this.http.patch(`${environment.API_url}/patient/update/${id}`, data).pipe(
+      map(res => res['message'])
+    )
+  };
+
 }

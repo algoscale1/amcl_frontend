@@ -10,7 +10,7 @@
 .register-body{
     border-radius: 20px;
     padding: 30px;
-    background-color: #D3D3D3;
+    background-color: #DEDEDE;
     height: 580px;
     /* background-color: white; */
 }
@@ -24,7 +24,7 @@ mat-form-field{
 
 .profile-block{
     border-radius: 10px;
-    background: white;
+    background: #DEDEDE;
     padding: 15px !important;
     margin: auto;
 }
@@ -34,11 +34,17 @@ mat-form-field{
     border-radius: 50%;
     padding-bottom: 20px;
     margin-bottom: 5px;
+    width: 200px;
+    height: 200px;
 }
 
 .patient-profile{
     justify-content: center;
     display: flex;
+}
+
+.profilePic{
+    width: -webkit-fill-available;
 }
 
 .image{

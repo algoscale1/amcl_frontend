@@ -1,3 +1,69 @@
-<p>
-  community works!
-</p>
+<div class="container-fluid community-wrapper">
+  <h3>List of Patients</h3>
+  <div class="container list">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr style="color: darkblue">
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Date of Birth</th>
+          <th scope="col">MTM (Y/N)</th>
+          <th scope="col">Eligible for annual CMR</th>
+          <th scope="col">Star Rating</th>
+          <th scope="col">Risk Factor</th>
+          <th scope="col">Last Interaction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td><a style="cursor: pointer;">James Miller</a></td>
+          <td>01-09-1948</td>
+          <td>Y</td>
+          <td>Y</td>
+          <td>
+            <rating [(ngModel)]="starsCount1" [max]="5" [readonly]="true" [float]="true"></rating>
+          </td>
+          <td>82</td>
+          <td>January 15th 2019</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td><a style="cursor: pointer;">David Wilson</a></td>
+          <td>02-05-1940</td>
+          <td>Y</td>
+          <td>Y</td>
+          <td>
+            <rating [(ngModel)]="starsCount2" [max]="5" [readonly]="true" [float]="true"></rating>
+          </td>
+          <td>53</td>
+          <td>January 5th 2019</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td><a style="cursor: pointer;">Sarah Smith</a></td>
+          <td>02-04-1943</td>
+          <td>Y</td>
+          <td>Y</td>
+          <td>
+            <rating [(ngModel)]="starsCount3" [max]="5" [readonly]="true" [float]="true"></rating>
+          </td>
+          <td>73</td>
+          <td>January 6th 2019</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td><a style="cursor: pointer;">Martha Doe</a></td>
+          <td>01-06-1947</td>
+          <td>Y</td>
+          <td>Y</td>
+          <td>
+            <rating [(ngModel)]="starsCount4" [max]="5" [readonly]="true" [float]="true"></rating>
+          </td>
+          <td>64</td>
+          <td>December 20th 2018</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

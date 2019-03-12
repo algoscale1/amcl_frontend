@@ -14,14 +14,17 @@
     background: white;
     margin-top: 30px;
     margin-bottom: 30px;
-    margin-left:4%;
-    margin-right: 30px;
 }
 
 .review > label {
     padding-right: 20px;
+    vertical-align: bottom;
 }
 
 .review > mat-form-field{
     width: 100%;
+}
+
+.register-body{
+    height: 100% !important;
 }

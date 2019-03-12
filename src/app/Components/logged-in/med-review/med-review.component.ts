@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PatientService } from 'src/app/Services/patient.service';
+
 @Component({
   selector: 'app-med-review',
   templateUrl: './med-review.component.html',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedReviewComponent implements OnInit {
 
-  constructor() { }
+  patientList = [];
+
+  constructor(private patientService: PatientService) { }
 
   ngOnInit() {
+
+    this.patientService.getPatientList().subscribe(
+      res => {
+        this.patientList = res;
+      }
+    )
   }
 
 }

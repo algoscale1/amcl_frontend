@@ -1,0 +1,8 @@
+.review-wrapper{
+    justify-content: center;
+    display: flex;
+    padding: 25px;
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    flex-wrap: wrap;
+}

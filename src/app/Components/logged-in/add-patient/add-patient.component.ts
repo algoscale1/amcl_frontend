@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
-import { AddPatientService } from 'src/app/Services/add-patient.service';
+import { PatientService } from 'src/app/Services/patient.service';
 import { ErrorComponent } from '../../log-in/error/error.component';
 
 @Component({
@@ -14,7 +14,6 @@ import { ErrorComponent } from '../../log-in/error/error.component';
 export class AddPatientComponent implements OnInit {
 
   profile_comp: String = '70%';
-  url = '../../../../assets/images/1.jpeg';
   ft = [
     { value: '2' },
     { value: '3' },
@@ -42,10 +41,12 @@ export class AddPatientComponent implements OnInit {
     { value: 'Single' }
   ];
   billingAdd = true;
+  profileImg: File;
+  imgURL;
 
   patientForm: FormGroup;
 
-  constructor(private addPatientService: AddPatientService, private router: Router, private snackBar: MatSnackBar) {
+  constructor(private patientService: PatientService, private router: Router, private snackBar: MatSnackBar) {
     this.patientForm = new FormGroup({
       fname: new FormControl('', Validators.required),
       lname: new FormControl('', Validators.required),
@@ -57,7 +58,8 @@ export class AddPatientComponent implements OnInit {
       address: new FormControl('', Validators.required),
       mailing_address: new FormControl('', Validators.required),
       billAddChange: new FormControl('yes'),
-      biling_address: new FormControl('')
+      biling_address: new FormControl(''),
+      profileImg: new FormControl('', Validators.required)
     });
   }
 
@@ -73,29 +75,41 @@ export class AddPatientComponent implements OnInit {
     }
   }
 
+  newProfile(event) {
+
+    this.profileImg = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.profileImg);
+    reader.onload = (e) => {
+      this.imgURL = reader.result;
+    }
+  }
+
   onSubmit() {
 
-    this.patientForm.controls['biling_address'].setValue(this.patientForm.controls['mailing_address'].value);
+    if (this.billingAdd = false) {
+      this.patientForm.controls['biling_address'].setValue(this.patientForm.controls['mailing_address'].value);
+    }
 
-    let data = {
-      name: this.patientForm.controls['fname'].value + ' ' + this.patientForm.controls['lname'].value,
-      gender: this.patientForm.controls['gender'].value,
-      weight: this.patientForm.controls['weight'].value,
-      height: this.patientForm.controls['heightFt'].value + '.' + this.patientForm.controls['heightIn'].value,
-      marital_status: this.patientForm.controls['marital_status'].value,
-      address: this.patientForm.controls['address'].value,
-      mailing_address: this.patientForm.controls['mailing_address'].value,
-      billing_address: this.patientForm.controls['biling_address'].value
-    };
+    let data = new FormData();
+    data.append('name', this.patientForm.controls['fname'].value + ' ' + this.patientForm.controls['lname'].value);
+    data.append('gender', this.patientForm.controls['gender'].value);
+    data.append('weight', this.patientForm.controls['weight'].value);
+    data.append('height', this.patientForm.controls['heightFt'].value + '.' + this.patientForm.controls['heightIn'].value);
+    data.append('marital_status', this.patientForm.controls['marital_status'].value);
+    data.append('address', this.patientForm.controls['address'].value);
+    data.append('mailing_address', this.patientForm.controls['mailing_address'].value);
+    data.append('billing_address', this.patientForm.controls['biling_address'].value);
+    data.append('profileImage', this.profileImg);
 
-    this.addPatientService.addPatient(data).subscribe(
+    this.patientService.addPatient(data).subscribe(
       res => {
         this.snackBar.openFromComponent(ErrorComponent, {
           duration: 3000,
           data: 'Patient Added!'
         });
 
-        this.router.navigate(['/community']);
+        this.router.navigate(['/review_list']);
       },
       err => { }
     )

@@ -1,0 +1,18 @@
+.community-wrapper{
+    padding: 20px;
+}
+
+.table {
+    /* border-style: ridge; */
+    background-color: white;
+    width: 100%;
+    box-shadow: 15px 15px #DEDEDE;
+}
+
+h1{
+    color: black;
+}
+
+.heading > hr{
+    border-color: black;
+}

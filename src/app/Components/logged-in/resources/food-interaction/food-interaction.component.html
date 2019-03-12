@@ -35,8 +35,8 @@
         </mat-expansion-panel-header>
 
         <mat-list>
-          <p>{{ drugData.food_int_details }}</p>
-          <mat-list-item *ngIf="!drugData.food_int_details" style="color:red">No Food Interaction found
+          <p>{{ drugData.drug_information.food_int_details }}</p>
+          <mat-list-item *ngIf="!drugData.drug_information.food_int_details" style="color:red">No Food Interaction found
           </mat-list-item>
         </mat-list>
 
@@ -53,8 +53,9 @@
         </mat-expansion-panel-header>
 
         <mat-list>
-          <p>{{ drugData.alcohol_int_deatils }}</p>
-          <mat-list-item *ngIf="!drugData.alcohol_int_deatils" style="color:red">No Alcohol Interaction found
+          <p>{{ drugData.drug_information.alcohol_int_deatils }}</p>
+          <mat-list-item *ngIf="!drugData.drug_information.alcohol_int_deatils" style="color:red">No Alcohol Interaction
+            found
           </mat-list-item>
         </mat-list>
 
@@ -72,8 +73,9 @@
         </mat-expansion-panel-header>
 
         <mat-list>
-          <p>{{ drugData.caffeine_int_details }}</p>
-          <mat-list-item *ngIf="!drugData.caffeine_int_details" style="color:red">No Caffeine Interaction found
+          <p>{{ drugData.drug_information.caffeine_int_details }}</p>
+          <mat-list-item *ngIf="!drugData.drug_information.caffeine_int_details" style="color:red">No Caffeine
+            Interaction found
           </mat-list-item>
         </mat-list>
 

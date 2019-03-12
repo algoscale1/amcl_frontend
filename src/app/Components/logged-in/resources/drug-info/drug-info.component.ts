@@ -52,13 +52,10 @@ export class DrugInfoComponent implements OnInit {
 
   onSearchClick() {
 
-    this.searchService.getSubstances().subscribe(res => {
-      this.substances = res;
-    });
-
     if (this.selectedDrug) {
       this.searchService.drugDetails(this.selectedDrug).subscribe(res => {
         this.drugData = res;
+        console.log(this.drugData);
         this.searchSubmit = true;
       });
 

@@ -6,12 +6,11 @@
   <div class="card-body">
     <form [formGroup]="patientForm">
       <div class="col-md-12 row" style="margin:0px;">
-        <div class="col-md-8 register-body">
+        <div class="col-md-9 register-body">
           <div class="row">
             <div class="col-md-5">
               <mat-form-field class="input">
                 <input matInput placeholder="First Name" formControlName="fname">
-                <!-- <mat-placeholder class="placeholder">First Name</mat-placeholder> -->
               </mat-form-field>
             </div>
             <div class="col-md-5">
@@ -73,20 +72,21 @@
             <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="profile-block col-md-9">
-            <img [src]="url" id="profile" class="patient-img">
+        <div class="col-md-3">
+          <div class="profile-block col-md-10">
+            <img [src]="imgURL" id="profile" class="patient-img" *ngIf="imgURL">
             <div class="image">
-              <input type="file" name="pic" accept="image/*" (changeer)=newProfile($event)>
+              <input class="profilePic" type="file" name="pic" accept="image/*" formControlName="profileImg"
+                (change)=newProfile($event)>
             </div>
-            <div class="patient-profile col-md-12">
+            <!-- <div class="patient-profile col-md-12">
               <div class="row">
-                <h4>Mary Brown</h4>
+                <h5>Mary Brown</h5>
               </div>
-            </div>
+            </div> -->
           </div>
-          <div class="col-md-9 profile-completion">
-            <h3>Profile Completion</h3>
+          <div class="col-md-12 profile-completion">
+            <h4>Profile Completion</h4>
             <circle-progress [percent]="70" [radius]="60" title={{profile_comp}} [outerStrokeWidth]="15"
               [innerStrokeWidth]="15" [outerStrokeColor]="'#00D9AF'" [innerStrokeColor]="'#e7e8ea'" [animation]="true"
               [animationDuration]="500" space="-15" outerStrokeLinecap="square" titleFontSize="40">

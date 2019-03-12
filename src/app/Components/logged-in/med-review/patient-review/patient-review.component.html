@@ -16,13 +16,93 @@
     </div>
   </div>
 
-  <div class="col-md-9 review-block">
-    <div class="review col-md-12" style="padding:0px 0px 15px 0px">
+  <div class="col-md-12 review-block">
+    <div class="review col-md-12">
       <label>Is the patient present :</label>
       <mat-radio-group>
         <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
         <mat-radio-button value="no">No</mat-radio-button>
       </mat-radio-group>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="patientForm">
+        <div class="col-md-12 row" style="margin:0px;">
+          <div class="col-md-9 register-body">
+            <div class="row">
+              <div class="col-md-5">
+                <mat-form-field class="input">
+                  <input matInput placeholder="First Name" [readonly]="!ifEdit" formControlName="fname">
+                </mat-form-field>
+              </div>
+              <div class="col-md-5">
+                <mat-form-field>
+                  <input matInput placeholder="Last Name" formControlName="lname" [readonly]="!ifEdit">
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select placeholder="Gender" formControlName="gender" [disabled]="!ifEdit">
+                    <mat-option *ngFor="let gender of gender" [value]="gender.value">{{gender.value}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field>
+                  <input matInput placeholder="Weight(lbs)" formControlName="weight" [readonly]="!ifEdit">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-select placeholder="Height(ft.)" formControlName="heightFt" [disabled]="!ifEdit">
+                    <mat-option *ngFor="let ft of ft" [value]="ft.value">{{ ft.value }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-select placeholder="Height(inch.)" formControlName="heightIn" [disabled]="!ifEdit">
+                    <mat-option *ngFor="let inch of inch" [value]="inch.value">{{ inch.value }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-select placeholder="Marital Status" formControlName="marital_status" [disabled]="!ifEdit">
+                    <mat-option *ngFor="let marital of marital" [value]="marital.value">{{marital.value}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="Address" formControlName="address" [readonly]="!ifEdit">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Mailing Address" formControlName="mailing_address" [readonly]="!ifEdit">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Billing Address" [readonly]="!billingAdd" formControlName="biling_address"
+                [readonly]="!ifEdit">
+            </mat-form-field>
+            <div class="button" *ngIf="!ifEdit">
+              <button mat-raised-button color="warn" (click)="onEdit()">Edit</button>
+            </div>
+            <div class="button" *ngIf="ifEdit">
+              <button mat-raised-button color="primary" (click)="onUpdate()">Update</button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="profile-block col-md-10">
+              <img [src]="imgURL" id="profile" class="patient-img">
+              <div class="image">
+                <input class="profilePic" type="file" name="pic" accept="image/*" formControlName="profileImg"
+                  (change)=newProfile($event) [readonly]="!ifEdit">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
