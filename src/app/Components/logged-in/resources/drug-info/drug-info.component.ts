@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { SearchService } from 'src/app/Services/search.service';
+import { SideEffectsComponent } from './side-effects/side-effects.component';
 
 @Component({
   selector: 'app-drug-info',
@@ -20,7 +21,7 @@ export class DrugInfoComponent implements OnInit {
   step = 0;
   searchSubmit = false;
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -55,7 +56,7 @@ export class DrugInfoComponent implements OnInit {
     if (this.selectedDrug) {
       this.searchService.drugDetails(this.selectedDrug).subscribe(res => {
         this.drugData = res;
-        console.log(this.drugData);
+        // console.log(this.drugData);
         this.searchSubmit = true;
       });
 
@@ -68,10 +69,10 @@ export class DrugInfoComponent implements OnInit {
       this.sideEffect = res;
       // console.log(this.sideEffect)
 
-      // const dialogRef = this.dialog.open(SubstancePopupComponent, {
-      //   width: '500px',
-      //   data: { drug: this.sideEffect, class: id }
-      // });
+      const dialogRef = this.dialog.open(SideEffectsComponent, {
+        width: '500px',
+        data: { drug: this.sideEffect, class: id }
+      });
 
       // dialogRef.afterClosed().subscribe(result => { });
     });

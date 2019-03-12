@@ -1,8 +1,32 @@
 .review-wrapper{
     justify-content: center;
     display: flex;
-    padding: 25px;
-    min-height: 100%;
-    min-height: -webkit-fill-available;
-    flex-wrap: wrap;
+    padding: 45px;
+}
+
+table{
+    width:90%;
+    padding: 20px;
+}
+
+th{
+    font-size: 30px;
+    padding: 10px 0 10px 20px !important;
+    color: black;
+}
+
+td{
+    padding: 0 !important;
+}
+
+.mat-nav-list{
+    padding: 5px;
+}
+
+.mat-nav-list > a{
+    padding-inline-start: 20px;
+}
+
+.mat-row:nth-child(even){
+    background-color:#DEDEDE;
 }

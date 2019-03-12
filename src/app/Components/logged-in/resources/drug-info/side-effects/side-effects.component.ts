@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+import { DrugInfoComponent } from '../drug-info.component';
 
 @Component({
   selector: 'app-side-effects',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideEffectsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<DrugInfoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

@@ -79,13 +79,13 @@
           Pharmacological Classes
         </mat-expansion-panel-header>
 
-        <mat-list>
-          <mat-list-item style="cursor: pointer;"
-            *ngFor="let classes of drugData.drug_information.classes; let last=last" (click)="getDrug(classes)">
+        <mat-nav-list>
+          <mat-list-item *ngFor="let classes of drugData.drug_information.classes; let last=last"
+            (click)="getDrug(classes)">
             <a>{{ classes }}</a>
             <mat-divider *ngIf="!last"></mat-divider>
           </mat-list-item>
-        </mat-list>
+        </mat-nav-list>
 
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">Previous</button>

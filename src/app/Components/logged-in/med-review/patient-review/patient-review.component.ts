@@ -111,12 +111,12 @@ export class PatientReviewComponent implements OnInit {
     data.append('address', this.patientForm.controls['address'].value);
     data.append('mailing_address', this.patientForm.controls['mailing_address'].value);
     data.append('billing_address', this.patientForm.controls['biling_address'].value);
-    data.append('profileImage', this.profileImg);
+    // data.append('profileImage', this.profileImg);
 
     this.patientService.updatePatient(this.patientId, data).subscribe(
       res => {
         this.snackBar.open(res, '', {
-          duration: 1000
+          duration: 2000
         })
 
         this.ifEdit = false;

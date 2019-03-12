@@ -1,3 +1,16 @@
-<p>
-  side-effects works!
-</p>
+<h1 mat-dialog-title>Side Effects of class {{ data.class }}</h1>
+<div mat-dialog-content>
+
+  <mat-list class="substanceList" *ngIf="data.drug">
+    <mat-list-item *ngFor="let effects of data.drug.side_effects">{{ effects }}
+      <mat-divider *ngIf="!last"></mat-divider>
+    </mat-list-item>
+  </mat-list>
+  <mat-list *ngIf="!data.drug">
+    <mat-list-item style="color:red">No side effects</mat-list-item>
+  </mat-list>
+
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Close</button>
+</div>

@@ -41,7 +41,7 @@
               </div>
               <div class="col-md-2">
                 <mat-form-field>
-                  <mat-select placeholder="Gender" formControlName="gender" [disabled]="!ifEdit">
+                  <mat-select placeholder="Gender" formControlName="gender">
                     <mat-option *ngFor="let gender of gender" [value]="gender.value">{{gender.value}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -82,8 +82,7 @@
               <input matInput placeholder="Mailing Address" formControlName="mailing_address" [readonly]="!ifEdit">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Billing Address" [readonly]="!billingAdd" formControlName="biling_address"
-                [readonly]="!ifEdit">
+              <input matInput placeholder="Billing Address" formControlName="biling_address" [readonly]="!ifEdit">
             </mat-form-field>
             <div class="button" *ngIf="!ifEdit">
               <button mat-raised-button color="warn" (click)="onEdit()">Edit</button>

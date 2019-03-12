@@ -99,7 +99,7 @@ import { TokenInterceptor } from './Authentication/interceptor.interceptor';
       multi: true
     }
   ],
-  entryComponents: [ErrorComponent],
+  entryComponents: [ErrorComponent, SideEffectsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

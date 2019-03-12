@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { PatientService } from 'src/app/Services/patient.service';
 
@@ -10,8 +11,9 @@ import { PatientService } from 'src/app/Services/patient.service';
 export class MedReviewComponent implements OnInit {
 
   patientList = [];
+  displayedColumns: string[] = ['name'];
 
-  constructor(private patientService: PatientService) { }
+  constructor(private patientService: PatientService, private router: Router) { }
 
   ngOnInit() {
 
@@ -20,6 +22,10 @@ export class MedReviewComponent implements OnInit {
         this.patientList = res;
       }
     )
+  }
+
+  patientDetail(id) {
+    this.router.navigate([`/review/${id}`]);
   }
 
 }
