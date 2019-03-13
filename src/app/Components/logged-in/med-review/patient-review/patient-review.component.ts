@@ -16,6 +16,7 @@ export class PatientReviewComponent implements OnInit {
   patientId;
   patientInfo: any = [];
   patientForm: FormGroup;
+  InitialForm: FormGroup;
   ft = [
     { value: '2' },
     { value: '3' },
@@ -46,6 +47,9 @@ export class PatientReviewComponent implements OnInit {
   height: String;
   profileImg: File;
   imgURL;
+  indicationList = [];
+  indications = [];
+  drugList = [];
 
   constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar) {
     let getPatient = new Promise((resolve, rej) => {
@@ -68,6 +72,7 @@ export class PatientReviewComponent implements OnInit {
       this.imgURL = this.patientInfo['profile_pic'].image;
 
       this.patientForm = new FormGroup({
+        present: new FormControl(''),
         fname: new FormControl(this.name.split(" ", 2)[0]),
         lname: new FormControl(this.name.split(" ", 2)[1]),
         gender: new FormControl(this.patientInfo['gender']),
@@ -81,9 +86,22 @@ export class PatientReviewComponent implements OnInit {
         profileImg: new FormControl('')
       });
     });
+
+
+    this.InitialForm = new FormGroup({
+      review: new FormControl('yes'),
+      history: new FormControl('manual')
+    });
   }
 
   ngOnInit() {
+
+    this.patientService.getAllIndication().subscribe(
+      res => {
+        this.indicationList = res;
+        // console.log(this.indicationList)
+      }
+    )
   }
 
   onEdit() {
@@ -124,5 +142,19 @@ export class PatientReviewComponent implements OnInit {
       }
     );
   };
+
+  onselectIndication() {
+
+    let data = {
+      indication_id: this.indications
+    }
+
+    this.patientService.getDrugForEachIndication(data).subscribe(
+      res => {
+        this.drugList = res;
+        // console.log(this.drugList);
+      }
+    )
+  }
 
 }

@@ -1,0 +1,17 @@
+<mat-form-field class="example-chip-list">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let indication of indications" [selectable]="selectable" [removable]="removable"
+      (removed)="remove(indication)">
+      {{indication}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="Pre-existing Conditions" #indicationInput [formControl]="indicationCtrl"
+      [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let indication of indicationList" [value]="indication._id">
+      {{indication.indication}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

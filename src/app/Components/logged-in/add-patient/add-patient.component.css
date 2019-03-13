@@ -34,8 +34,8 @@ mat-form-field{
     border-radius: 50%;
     padding-bottom: 20px;
     margin-bottom: 5px;
-    width: 200px;
-    height: 200px;
+    /* width: 200px;
+    height: 200px; */
 }
 
 .patient-profile{

@@ -27,4 +27,13 @@
 
 .register-body{
     height: 100% !important;
+    margin-bottom: 20px;
+}
+
+.smoke{
+    vertical-align: sub !important;
+}
+
+.review-btn{
+    margin-bottom: 10%;
 }

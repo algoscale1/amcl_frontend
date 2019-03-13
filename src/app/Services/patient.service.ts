@@ -43,4 +43,18 @@ export class PatientService {
     )
   };
 
+  getAllIndication() {
+
+    return this.http.get(`${environment.API_url}/drug/indication/get/`).pipe(
+      map(res => res['data'])
+    )
+  };
+
+  getDrugForEachIndication(data?) {
+
+    return this.http.get(`${environment.API_url}/drug/indication/get`, { params: data }).pipe(
+      map(res => res['data'])
+    )
+  }
+
 }

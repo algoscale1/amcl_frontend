@@ -41,6 +41,7 @@ import { ErrorComponent } from './Components/log-in/error/error.component';
 import { AccountComponent } from './Components/logged-in/account/account.component';
 import { PatientReviewComponent } from './Components/logged-in/med-review/patient-review/patient-review.component';
 import { TokenInterceptor } from './Authentication/interceptor.interceptor';
+import { IndicationListComponent } from './Components/logged-in/med-review/patient-review/indication-list/indication-list.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { TokenInterceptor } from './Authentication/interceptor.interceptor';
     FoodInteractionComponent,
     ErrorComponent,
     AccountComponent,
-    PatientReviewComponent
+    PatientReviewComponent,
+    IndicationListComponent
   ],
   imports: [
     BrowserModule,

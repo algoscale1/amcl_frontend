@@ -1,32 +1,34 @@
 <div class="review-wrapper">
-  <div class="col-md-12 row">
-    <div class="col-md-6">
-      <h3 class="title">Initiate a review :</h3>
-      <mat-radio-group>
-        <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
-        <mat-radio-button value="no">No</mat-radio-button>
-      </mat-radio-group>
+  <form [formGroup]="InitialForm">
+    <div class="col-md-12 row">
+      <div class="col-md-6">
+        <h3 class="title">Initiate a review :</h3>
+        <mat-radio-group formControlName="review">
+          <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
+          <mat-radio-button value="no">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-6">
+        <h3 class="title">Medical history :</h3>
+        <mat-radio-group formControlName="history">
+          <mat-radio-button value="emr">EMR</mat-radio-button>&nbsp;
+          <mat-radio-button value="manual">Manual</mat-radio-button>
+        </mat-radio-group>
+      </div>
     </div>
-    <div class="col-md-6">
-      <h3 class="title">Medical history :</h3>
-      <mat-radio-group>
-        <mat-radio-button value="emr">EMR</mat-radio-button>&nbsp;
-        <mat-radio-button value="manual" checked>Manual</mat-radio-button>
-      </mat-radio-group>
-    </div>
-  </div>
+  </form>
 
-  <div class="col-md-12 review-block">
-    <div class="review col-md-12">
-      <label>Is the patient present :</label>
-      <mat-radio-group>
-        <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
-        <mat-radio-button value="no">No</mat-radio-button>
-      </mat-radio-group>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="patientForm">
-        <div class="col-md-12 row" style="margin:0px;">
+  <div class="review-block">
+    <form [formGroup]="patientForm">
+      <div class="review col-md-12">
+        <label>Is the patient present :</label>
+        <mat-radio-group formControlName="present">
+          <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
+          <mat-radio-button value="no">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="card-body">
+        <div class="row" style="margin:0px;">
           <div class="col-md-9 register-body">
             <div class="row">
               <div class="col-md-5">
@@ -85,7 +87,7 @@
               <input matInput placeholder="Billing Address" formControlName="biling_address" [readonly]="!ifEdit">
             </mat-form-field>
             <div class="button" *ngIf="!ifEdit">
-              <button mat-raised-button color="warn" (click)="onEdit()">Edit</button>
+              <button mat-flat-button color="warn" (click)="onEdit()">Edit</button>
             </div>
             <div class="button" *ngIf="ifEdit">
               <button mat-raised-button color="primary" (click)="onUpdate()">Update</button>
@@ -101,7 +103,111 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
+    </form>
+    <div class="register-body">
+      <h5>Patient Medical Information</h5>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-select placeholder="Pre-existing Conditions" [(ngModel)]="indications"
+              (ngModelChange)="onselectIndication()" multiple>
+              <mat-option *ngFor="let indication of indicationList" [value]="indication._id">
+                {{indication.indication}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-select placeholder="Medication history" [(ngModel)]="selectedMed" (ngModelChange)="onselectMed()"
+              multiple>
+              <mat-option *ngFor="let med of drugList" [value]="med._id">
+                (Ndc: {{med.ndc}}) {{med.brand_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Supplement, Alcohol, Caffeine intake">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Supplement, Alcohol, Caffeine intake">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="CYP genetic test results">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Self-reported Concerns">
+          </mat-form-field>
+        </div>
+      </div>
     </div>
+    <div class="register-body">
+      <div class="row">
+        <div class="col-md-6" style="padding: 0px 20px">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Is prescription taken regularly ?">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6" style="padding: 20px">
+          <label>Diet lifestyle issues :</label>
+          Does the patient smoke?&nbsp;
+          <mat-radio-group class="smoke">
+            <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
+            <mat-radio-button value="no" checked>No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-md-6" style="padding: 20px">
+          <label>Blood Test</label>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Hemoglobin(g/dl)">
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Hematocrit(%)">
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Neutrophils/100 Leukocytes(%)">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="padding: 20px">
+          <label>Glucose Level :</label>
+          Is the patient diabetic?&nbsp;
+          <mat-radio-group class="smoke">
+            <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+          <div>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="glucose level upon walking(mmol/L)">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Before Meal(mmol/L%)">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="90 minutes after mealsmmol/L%)">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="review-btn">
+    <button class="btn btn-primary" type="button">Run Review and Generate Report</button>
   </div>
 </div>
