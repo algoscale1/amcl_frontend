@@ -3,7 +3,7 @@
     <div class="col-md-12 row">
       <div class="col-md-6">
         <h3 class="title">Initiate a review :</h3>
-        <mat-radio-group formControlName="review">
+        <mat-radio-group formControlName="review" (change)="getReviewForm()">
           <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
           <mat-radio-button value="no">No</mat-radio-button>
         </mat-radio-group>
@@ -18,12 +18,12 @@
     </div>
   </form>
 
-  <div class="review-block">
+  <div class="review-block" *ngIf="initiatReview">
     <form [formGroup]="patientForm">
       <div class="review col-md-12">
         <label>Is the patient present :</label>
         <mat-radio-group formControlName="present">
-          <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
+          <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
           <mat-radio-button value="no">No</mat-radio-button>
         </mat-radio-group>
       </div>
@@ -31,14 +31,21 @@
         <div class="row" style="margin:0px;">
           <div class="col-md-9 register-body">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <mat-form-field class="input">
-                  <input matInput placeholder="First Name" [readonly]="!ifEdit" formControlName="fname">
+                  <input matInput placeholder="First Name" formControlName="fname">
                 </mat-form-field>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-3">
                 <mat-form-field>
-                  <input matInput placeholder="Last Name" formControlName="lname" [readonly]="!ifEdit">
+                  <input matInput placeholder="Last Name" formControlName="lname">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
               </div>
               <div class="col-md-2">
@@ -52,162 +59,160 @@
             <div class="row">
               <div class="col-md-3">
                 <mat-form-field>
-                  <input matInput placeholder="Weight(lbs)" formControlName="weight" [readonly]="!ifEdit">
+                  <input matInput placeholder="Weight(lbs)" formControlName="weight">
                 </mat-form-field>
               </div>
               <div class="col-md-3">
                 <mat-form-field>
-                  <mat-select placeholder="Height(ft.)" formControlName="heightFt" [disabled]="!ifEdit">
+                  <mat-select placeholder="Height(ft.)" formControlName="heightFt">
                     <mat-option *ngFor="let ft of ft" [value]="ft.value">{{ ft.value }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-3">
                 <mat-form-field>
-                  <mat-select placeholder="Height(inch.)" formControlName="heightIn" [disabled]="!ifEdit">
+                  <mat-select placeholder="Height(inch.)" formControlName="heightIn">
                     <mat-option *ngFor="let inch of inch" [value]="inch.value">{{ inch.value }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-3">
                 <mat-form-field>
-                  <mat-select placeholder="Marital Status" formControlName="marital_status" [disabled]="!ifEdit">
+                  <mat-select placeholder="Marital Status" formControlName="marital_status">
                     <mat-option *ngFor="let marital of marital" [value]="marital.value">{{marital.value}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
             </div>
             <mat-form-field>
-              <input matInput placeholder="Address" formControlName="address" [readonly]="!ifEdit">
+              <input matInput placeholder="Address" formControlName="address">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Mailing Address" formControlName="mailing_address" [readonly]="!ifEdit">
+              <input matInput placeholder="Mailing Address" formControlName="mailing_address">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Billing Address" formControlName="biling_address" [readonly]="!ifEdit">
+              <input matInput placeholder="Billing Address" formControlName="biling_address">
             </mat-form-field>
-            <div class="button" *ngIf="!ifEdit">
-              <button mat-flat-button color="warn" (click)="onEdit()">Edit</button>
-            </div>
-            <div class="button" *ngIf="ifEdit">
-              <button mat-raised-button color="primary" (click)="onUpdate()">Update</button>
-            </div>
           </div>
           <div class="col-md-3">
             <div class="profile-block col-md-10">
               <img [src]="imgURL" id="profile" class="patient-img">
               <div class="image">
                 <input class="profilePic" type="file" name="pic" accept="image/*" formControlName="profileImg"
-                  (change)=newProfile($event) [readonly]="!ifEdit">
+                  (change)=newProfile($event)>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="register-body">
+        <h5>Patient Medical Information</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-select placeholder="Pre-existing Conditions" formControlName="pre_existing_conditions"
+                (ngModelChange)="onselectIndication()" multiple>
+                <mat-option *ngFor="let indication of indicationList" [value]="indication._id">
+                  {{indication.indication}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-select placeholder="Medication history" formControlName="medication_history" multiple>
+                <mat-option *ngFor="let med of drugList" [value]="med._id">
+                  (Ndc: {{med.ndc}}) {{med.brand_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Alergies" formControlName="">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Supplement, Alcohol, Caffeine intake"
+                formControlName="supliment_alcohol_caffiene_intake">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="CYP genetic test results" formControlName="cyp_genetic_test">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Self-reported Concerns" formControlName="self_reported_concerns">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="register-body">
+        <div class="row">
+          <div class="col-md-6" style="padding: 0px 20px">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Is prescription taken regularly ?"
+                formControlName="is_precription_taken_regularly">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6" style="padding: 20px">
+            <label>Diet lifestyle issues :</label>
+            Does the patient smoke?&nbsp;
+            <mat-radio-group class="smoke" formControlName="is_smoke">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>&nbsp;
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="col-md-6" formArrayName="blood_test" style="padding: 20px">
+            <label>Blood Test</label>
+            <div *ngFor="let key of blood_test.controls; let i=index">
+              <div [formGroupName]="i" class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Test Results Type" formControlName="key">
+                      <mat-option *ngFor="let test of bloodTest | async" [value]="test">
+                        {{test.key}}[ {{test.range}} ]
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Value" formControlName="value">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <button mat-flat-button color="basic" *ngIf="bloodNum < 10" (click)="addAlias()">Add Test</button>
+          </div>
+          <div class="col-md-6" style="padding: 20px">
+            <label>Glucose Level :</label>
+            Is the patient diabetic?&nbsp;
+            <mat-radio-group class="smoke" formControlName="is_diabetic">
+              <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
+              <mat-radio-button value="no">No</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="glucose level upon walking(mmol/L)">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Before Meal(mmol/L%)">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="90 minutes after mealsmmol/L%)">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
-    <div class="register-body">
-      <h5>Patient Medical Information</h5>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-form-field>
-            <mat-select placeholder="Pre-existing Conditions" [(ngModel)]="indications"
-              (ngModelChange)="onselectIndication()" multiple>
-              <mat-option *ngFor="let indication of indicationList" [value]="indication._id">
-                {{indication.indication}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field>
-            <mat-select placeholder="Medication history" [(ngModel)]="selectedMed" (ngModelChange)="onselectMed()"
-              multiple>
-              <mat-option *ngFor="let med of drugList" [value]="med._id">
-                (Ndc: {{med.ndc}}) {{med.brand_name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Supplement, Alcohol, Caffeine intake">
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Supplement, Alcohol, Caffeine intake">
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="CYP genetic test results">
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Self-reported Concerns">
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <div class="register-body">
-      <div class="row">
-        <div class="col-md-6" style="padding: 0px 20px">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Is prescription taken regularly ?">
-          </mat-form-field>
-        </div>
-        <div class="col-md-6" style="padding: 20px">
-          <label>Diet lifestyle issues :</label>
-          Does the patient smoke?&nbsp;
-          <mat-radio-group class="smoke">
-            <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
-            <mat-radio-button value="no" checked>No</mat-radio-button>
-          </mat-radio-group>
-        </div>
-        <div class="col-md-6" style="padding: 20px">
-          <label>Blood Test</label>
-          <div class="row">
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Hemoglobin(g/dl)">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Hematocrit(%)">
-              </mat-form-field>
-            </div>
-            <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Neutrophils/100 Leukocytes(%)">
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6" style="padding: 20px">
-          <label>Glucose Level :</label>
-          Is the patient diabetic?&nbsp;
-          <mat-radio-group class="smoke">
-            <mat-radio-button value="yes" checked>Yes</mat-radio-button>&nbsp;
-            <mat-radio-button value="no">No</mat-radio-button>
-          </mat-radio-group>
-          <div>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="glucose level upon walking(mmol/L)">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Before Meal(mmol/L%)">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="90 minutes after mealsmmol/L%)">
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="review-btn">
-    <button class="btn btn-primary" type="button">Run Review and Generate Report</button>
+    <button class="btn btn-primary" (click)="onUpdate(patientForm.value)" type="button">Run Review and Generate
+      Report</button>
   </div>
 </div>

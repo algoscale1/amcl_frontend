@@ -14,7 +14,7 @@ export class DrugSubstitutionComponent implements OnInit {
   newSearchInput = '';
   newSearchData: [] = [];
   newSelectedDrug = '';
-  newSelectedDrugData: [] = [];
+  newSelectedDrugData = [];
   new_rxcui = [];
   dataLength: number;
   searchInput = '';
@@ -65,6 +65,7 @@ export class DrugSubstitutionComponent implements OnInit {
     this.searchService.drugDetails(this.newSelectedDrug).subscribe(res => {
       this.newSelectedDrugData = res;
     });
+
   };
 
   onSelectDrug() {
@@ -84,7 +85,7 @@ export class DrugSubstitutionComponent implements OnInit {
   onSearchClick() {
 
     let data = {
-      new_drug: this.newSelectedDrugData['_id'],
+      new_drug: this.newSelectedDrugData['drug_information'].id,
       old_drugs: this.old_brand_name,
     };
 

@@ -1,3 +1,23 @@
-<p>
-  generate-report works!
-</p>
+<div class="container-fluid">
+  <div class="print-icon" style="padding: 10px;">
+    <a (click)=print()></a>
+    <a></a>
+  </div>
+  <h2 class="report-title">Patient Report</h2>
+  <div class="card-body col-md-12">
+    <h2 class="title">Summary</h2>
+    <div class="summary col-md-12">
+      <ul style="list-style-type:circle;" class="row">
+        <li class="col-md-4"><b>Name: </b> {{ patientInfo.name }}</li>
+        <li class="col-md-4"><b>Gender: </b> {{ patientInfo.gender }}</li>
+        <li class="col-md-4"><b>Marital Status: </b> {{ patientInfo.marital_status }}</li>
+        <li class="col-md-4"><b>DOB: </b>{{ patientInfo.dob }}</li>
+        <li class="col-md-4"><b>Weight: </b>{{patientInfo.weight }}lbs</li>
+        <li class="col-md-4"><b>Height: </b>{{patientInfo.height }}</li>
+        <li class="col-md-12"><b>Address: </b>{{ patientInfo.address }}</li>
+        <li class="col-md-12"><b>Medical history: </b>Diabetes,stroke with atrial fibrillation</li>
+        <li class="col-md-12"><b>Medications: </b>Warfarin, Humalog, Bacterim, EpiPen</li>
+      </ul>
+    </div>
+  </div>
+</div>

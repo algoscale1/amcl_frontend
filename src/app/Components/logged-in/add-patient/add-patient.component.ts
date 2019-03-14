@@ -50,6 +50,7 @@ export class AddPatientComponent implements OnInit {
     this.patientForm = new FormGroup({
       fname: new FormControl('', Validators.required),
       lname: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
       weight: new FormControl('', Validators.required),
       heightFt: new FormControl('', Validators.required),
@@ -93,6 +94,7 @@ export class AddPatientComponent implements OnInit {
 
     let data = new FormData();
     data.append('name', this.patientForm.controls['fname'].value + ' ' + this.patientForm.controls['lname'].value);
+    data.append('dob', this.patientForm.controls['dob'].value);
     data.append('gender', this.patientForm.controls['gender'].value);
     data.append('weight', this.patientForm.controls['weight'].value);
     data.append('height', this.patientForm.controls['heightFt'].value + '.' + this.patientForm.controls['heightIn'].value);

@@ -55,6 +55,13 @@ export class PatientService {
     return this.http.get(`${environment.API_url}/drug/indication/get`, { params: data }).pipe(
       map(res => res['data'])
     )
-  }
+  };
+
+  getBloodTest() {
+
+    return this.http.get(`${environment.API_url}/drug/bloodTest/list`).pipe(
+      map(res => res['data'])
+    )
+  };
 
 }

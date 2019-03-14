@@ -8,14 +8,21 @@
       <div class="col-md-12 row" style="margin:0px;">
         <div class="col-md-9 register-body">
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-4">
               <mat-form-field class="input">
                 <input matInput placeholder="First Name" formControlName="fname">
               </mat-form-field>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
               <mat-form-field>
                 <input matInput placeholder="Last Name" formControlName="lname">
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="col-md-2">

@@ -29,7 +29,7 @@ import { AddPatientComponent } from './Components/logged-in/add-patient/add-pati
 import { CommunityComponent } from './Components/logged-in/community/community.component';
 import { MedReviewComponent } from './Components/logged-in/med-review/med-review.component';
 import { GenerateReportComponent } from './Components/logged-in/med-review/generate-report/generate-report.component';
-import { ReviewDrugsComponent } from './Components/logged-in/med-review/review-drugs/review-drugs.component';
+import { ReviewDrugsComponent } from './Components/logged-in/med-review/generate-report/review-drugs/review-drugs.component';
 import { ConfirmationDialogComponent } from './Components/logged-in/med-review/confirmation-dialog/confirmation-dialog.component';
 import { ResourcesComponent } from './Components/logged-in/resources/resources.component';
 import { DrugInfoComponent } from './Components/logged-in/resources/drug-info/drug-info.component';
