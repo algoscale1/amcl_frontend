@@ -75,6 +75,22 @@
       </mat-expansion-panel>
 
       <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+
+        <mat-expansion-panel-header style="background-color: rgb(15, 119, 11);">
+          Manufacturers
+        </mat-expansion-panel-header>
+        <mat-list class="subs">
+          <mat-list-item>{{ drugData.drug_information.manufacterer }}</mat-list-item>
+        </mat-list>
+
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
         <mat-expansion-panel-header style="background-color: rgb(236, 138, 81);">
           Pharmacological Classes
         </mat-expansion-panel-header>

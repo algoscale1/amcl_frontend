@@ -5,7 +5,8 @@
       <th mat-header-cell *matHeaderCellDef>Review Patients List</th>
       <td mat-cell *matCellDef="let element">
         <mat-nav-list>
-          <a mat-list-item (click)="patientDetail(element._id)"> {{ element.name }} </a>
+          <a class="list" mat-list-item (click)="patientDetail(element._id)"> {{ element.name }} </a>
+          <button mat-raised-button color="warn" (click)="onDelete(element._id)">Delete</button>
         </mat-nav-list>
       </td>
     </ng-container>

@@ -19,6 +19,11 @@ td{
     padding: 0 !important;
 }
 
+.list {
+    width: 90% !important;
+    display: inline-block !important;
+}
+
 .mat-nav-list{
     padding: 5px;
 }

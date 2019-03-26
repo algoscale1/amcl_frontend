@@ -13,7 +13,7 @@ import { ErrorComponent } from '../../log-in/error/error.component';
 })
 export class AddPatientComponent implements OnInit {
 
-  profile_comp: String = '70%';
+  profile_comp = 0;
   ft = [
     { value: '2' },
     { value: '3' },
@@ -56,7 +56,7 @@ export class AddPatientComponent implements OnInit {
       heightFt: new FormControl('', Validators.required),
       heightIn: new FormControl('', Validators.required),
       marital_status: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required),
+      address: new FormControl(''),
       mailing_address: new FormControl('', Validators.required),
       billAddChange: new FormControl('yes'),
       biling_address: new FormControl(''),
@@ -65,6 +65,49 @@ export class AddPatientComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.patientForm.valueChanges.subscribe(
+      (res) => {
+        // console.log(res)
+        var count = 0;
+
+        if (res.fname != "") {
+          count = count + 10;
+        }
+        if (res.gender != "") {
+          count = count + 10;
+        }
+        if (res.weight != "") {
+          count = count + 10;
+        }
+        if (res.heightFt != "" && res.heightIn) {
+          count = count + 10;
+        }
+        if (res.marital_status != "") {
+          count = count + 10;
+        }
+        if (res.dob != "") {
+          count = count + 10;
+        }
+        if (res.lname != "") {
+          count = count + 10;
+        }
+        if (res.mailing_address != "") {
+          count = count + 10;
+        }
+        if (res.billAddChange == "no") {
+          count = count + 10;
+        }
+        if (res.biling_address != "") {
+          count = count + 10;
+        }
+        if (res.profileImg != "") {
+          count = count + 10;
+        }
+
+        this.profile_comp = count;
+      }
+    );
   }
 
   ChangBillingAddress() {

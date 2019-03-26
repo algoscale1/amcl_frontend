@@ -43,6 +43,13 @@ export class PatientService {
     )
   };
 
+  deletePatient(id) {
+
+    return this.http.delete(`${environment.API_url}/patient/delete/${id}`).pipe(
+      map(res => res['message'])
+    )
+  };
+
   getAllIndication() {
 
     return this.http.get(`${environment.API_url}/drug/indication/get/`).pipe(

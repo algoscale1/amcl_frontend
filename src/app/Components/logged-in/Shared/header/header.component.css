@@ -7,6 +7,11 @@
     margin: 10px;
 }
 
+.logo{
+    width: 220px;
+    height: 120px;
+}
+
 .navbar{
     margin-bottom: 0px;
     border: 0px;

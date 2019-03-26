@@ -12,242 +12,92 @@ export class GenerateReportComponent implements OnInit {
 
   patientId = '';
   patientInfo = [];
+  test = [];
 
   constructor(private patientService: PatientService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
     this.patientId = this.route.snapshot.paramMap.get('id');
-    this.patientService.getPatient(this.patientId).subscribe(
-      res => {
-        this.patientInfo = res;
-        console.log(this.patientInfo);
-      }
-    );
+    let blood_test = new Promise((resolve, rej) => {
+      this.patientService.getPatient(this.patientId).subscribe(
+        res => {
+          this.patientInfo = res;
+          console.log(this.patientInfo);
+          resolve(true);
+        }
+      );
+    });
+
+    blood_test.then(() => {
+      this.patientInfo['blood_test'].forEach(element => {
+
+        let range: string = element.range;
+
+        let min_value = parseFloat(range.split('-', 2)[0]);
+        let max_value = parseFloat(range.split('-', 2)[1])
+
+        let low_max = min_value + (max_value - min_value) / 3;
+        let mod_max = max_value - (max_value - min_value) / 3;
+
+        this.test.push({
+          "chart": {
+            "theme": "fusion",
+            "caption": element.key,
+            "lowerLimit": range.split('-', 2)[0],
+            "upperLimit": range.split('-', 2)[1],
+            // "numberSuffix": "%",
+            "chartBottomMargin": "20",
+            "valueFontSize": "11",
+            "valueFontBold": "0"
+          },
+          // Gauge Data
+          "colorRange": {
+            "color": [{
+              "minValue": min_value,
+              "maxValue": low_max,
+              "label": "Low",
+            },
+            {
+              "minValue": low_max,
+              "maxValue": mod_max,
+              "label": "Moderate",
+            },
+            {
+              "minValue": mod_max,
+              "maxValue": max_value,
+              "label": "High",
+            }
+            ]
+          },
+          "pointers": {
+            "pointer": [{
+              "value": element.value
+            }]
+          },
+          "annotations": {
+            "origw": "400",
+            "origh": "190",
+            "autoscale": "1",
+            "groups": [{
+              "id": "range",
+              "items": [{
+                "id": "rangeBg",
+                "type": "rectangle",
+                "x": "$chartCenterX-115",
+                "y": "$chartEndY-35",
+                "tox": "$chartCenterX +115",
+                "toy": "$chartEndY-15",
+                "fillcolor": "#0075c2"
+              },
+              ]
+            }]
+          }
+        });
+      });
+
+      // console.log(this.test)
+    })
+
   }
-
-  hemoglobinChart = {
-    "chart": {
-      "theme": "fusion",
-      "caption": "Hemoglobin",
-      // "subcaption": "food.hsm.com",
-      "lowerLimit": "0",
-      "upperLimit": "40",
-      "numberSuffix": "g/dl",
-      "chartBottomMargin": "20",
-      "valueFontSize": "11",
-      "valueFontBold": "0"
-    },
-    // Gauge Data
-    "colorRange": {
-      "color": [{
-        "minValue": "0",
-        "maxValue": "15",
-        "label": "Low",
-      },
-      {
-        "minValue": "15",
-        "maxValue": "30",
-        "label": "Moderate",
-      },
-      {
-        "minValue": "30",
-        "maxValue": "40",
-        "label": "High",
-      }
-      ]
-    },
-    "pointers": {
-      "pointer": [{
-        "value": "18"
-      }]
-    },
-    "annotations": {
-      "origw": "400",
-      "origh": "190",
-      "autoscale": "1",
-      "groups": [{
-        "id": "range",
-        "items": [{
-          "id": "rangeBg",
-          "type": "rectangle",
-          "x": "$chartCenterX-115",
-          "y": "$chartEndY-35",
-          "tox": "$chartCenterX +115",
-          "toy": "$chartEndY-15",
-          "fillcolor": "#0075c2"
-        },
-        ]
-      }]
-    }
-  };
-
-  hematocritData = {
-    "chart": {
-      "theme": "fusion",
-      "caption": "Hematocrit",
-      // "subcaption": "food.hsm.com",
-      "lowerLimit": "0",
-      "upperLimit": "100",
-      "numberSuffix": "%",
-      "chartBottomMargin": "20",
-      "valueFontSize": "11",
-      "valueFontBold": "0"
-    },
-    // Gauge Data
-    "colorRange": {
-      "color": [{
-        "minValue": "0",
-        "maxValue": "35",
-        "label": "Low",
-      },
-      {
-        "minValue": "35",
-        "maxValue": "70",
-        "label": "Moderate",
-      },
-      {
-        "minValue": "70",
-        "maxValue": "100",
-        "label": "High",
-      }
-      ]
-    },
-    "pointers": {
-      "pointer": [{
-        "value": "79"
-      }]
-    },
-    "annotations": {
-      "origw": "400",
-      "origh": "190",
-      "autoscale": "1",
-      "groups": [{
-        "id": "range",
-        "items": [{
-          "id": "rangeBg",
-          "type": "rectangle",
-          "x": "$chartCenterX-115",
-          "y": "$chartEndY-35",
-          "tox": "$chartCenterX +115",
-          "toy": "$chartEndY-15",
-          "fillcolor": "#0075c2"
-        },
-        ]
-      }]
-    }
-  }
-
-  neutrophilsData = {
-    "chart": {
-      "theme": "fusion",
-      "caption": "Neutrophils/100 Leukocytes",
-      // "subcaption": "food.hsm.com",
-      "lowerLimit": "0",
-      "upperLimit": "100",
-      "numberSuffix": "%",
-      "chartBottomMargin": "20",
-      "valueFontSize": "11",
-      "valueFontBold": "0"
-    },
-    // Gauge Data
-    "colorRange": {
-      "color": [{
-        "minValue": "0",
-        "maxValue": "35",
-        "label": "Low",
-      },
-      {
-        "minValue": "35",
-        "maxValue": "70",
-        "label": "Moderate",
-      },
-      {
-        "minValue": "70",
-        "maxValue": "100",
-        "label": "High",
-      }
-      ]
-    },
-    "pointers": {
-      "pointer": [{
-        "value": "28"
-      }]
-    },
-    "annotations": {
-      "origw": "400",
-      "origh": "190",
-      "autoscale": "1",
-      "groups": [{
-        "id": "range",
-        "items": [{
-          "id": "rangeBg",
-          "type": "rectangle",
-          "x": "$chartCenterX-115",
-          "y": "$chartEndY-35",
-          "tox": "$chartCenterX +115",
-          "toy": "$chartEndY-15",
-          "fillcolor": "#0075c2"
-        },
-        ]
-      }]
-    }
-  };
-
-  glucoseData = {
-    "chart": {
-      "theme": "fusion",
-      "caption": "Blood glucose level for Type I Diabetes",
-      // "subcaption": "food.hsm.com",
-      "lowerLimit": "0",
-      "upperLimit": "100",
-      "numberSuffix": "%",
-      "chartBottomMargin": "20",
-      "valueFontSize": "10",
-      "valueFontBold": "0"
-    },
-    // Gauge Data
-    "colorRange": {
-      "color": [{
-        "minValue": "0",
-        "maxValue": "35",
-        "label": "Low",
-      },
-      {
-        "minValue": "35",
-        "maxValue": "70",
-        "label": "Moderate",
-      },
-      {
-        "minValue": "70",
-        "maxValue": "100",
-        "label": "High",
-      }
-      ]
-    },
-    "pointers": {
-      "pointer": [{
-        "value": "28"
-      }]
-    },
-    "annotations": {
-      "origw": "400",
-      "origh": "190",
-      "autoscale": "1",
-      "groups": [{
-        "id": "range",
-        "items": [{
-          "id": "rangeBg",
-          "type": "rectangle",
-          "x": "$chartCenterX-115",
-          "y": "$chartEndY-35",
-          "tox": "$chartCenterX +115",
-          "toy": "$chartEndY-15",
-          "fillcolor": "#0075c2"
-        },
-        ]
-      }]
-    }
-  };
-
 }

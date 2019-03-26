@@ -64,6 +64,10 @@
     font-weight: bold;
 }
 
+.gauge-value p {
+    font-size: smaller;
+}
+
 .disease-gauge{
     text-align: center;
 }

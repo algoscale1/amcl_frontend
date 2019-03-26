@@ -11,13 +11,39 @@
         <li class="col-md-4"><b>Name: </b> {{ patientInfo.name }}</li>
         <li class="col-md-4"><b>Gender: </b> {{ patientInfo.gender }}</li>
         <li class="col-md-4"><b>Marital Status: </b> {{ patientInfo.marital_status }}</li>
-        <li class="col-md-4"><b>DOB: </b>{{ patientInfo.dob }}</li>
+        <li class="col-md-4"><b>DOB: </b>{{ patientInfo.dob | date: 'dd/MM/yyyy' }}</li>
         <li class="col-md-4"><b>Weight: </b>{{patientInfo.weight }}lbs</li>
         <li class="col-md-4"><b>Height: </b>{{patientInfo.height }}</li>
         <li class="col-md-12"><b>Address: </b>{{ patientInfo.address }}</li>
-        <li class="col-md-12"><b>Medical history: </b>Diabetes,stroke with atrial fibrillation</li>
-        <li class="col-md-12"><b>Medications: </b>Warfarin, Humalog, Bacterim, EpiPen</li>
+        <li class="col-md-12"><b>Medical history: </b>
+          <label *ngFor="let indication of patientInfo.pre_existing_conditions">{{indication.indication}},&nbsp;</label>
+        </li>
+        <li class="col-md-12"><b>List of Medications: </b>
+          <label *ngFor="let med of patientInfo.medication_history">{{med.brand_name}},&nbsp;</label>
+        </li>
       </ul>
+    </div>
+  </div>
+  <div class="col-md-12 gauge-body">
+    <h4 class="text-center">Blood Test Result</h4>
+    <div class="row">
+      <div class="col-md-3" *ngFor="let test of test">
+        <div class="disease-gauge">
+          <div class="outer">
+            <fusioncharts width="250" height="190" type="hlineargauge" [dataSource]="test"></fusioncharts>
+          </div>
+          <div class="row">
+            <div class="col-md-6 gauge-value">
+              <p>Normal Range</p>
+              <h6>{{test.chart.lowerLimit}} - {{test.chart.upperLimit}}</h6>
+            </div>
+            <div class="col-md-6 gauge-value">
+              <p>Previous Score</p>
+              <h6>18</h6>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -26,6 +26,15 @@ export class MedReviewComponent implements OnInit {
 
   patientDetail(id) {
     this.router.navigate([`/review/${id}`]);
-  }
+  };
+
+  onDelete(id) {
+    this.patientService.deletePatient(id).subscribe(
+      res => {
+        // this.router.navigate[this.router.url]
+        this.ngOnInit();
+      }
+    )
+  };
 
 }

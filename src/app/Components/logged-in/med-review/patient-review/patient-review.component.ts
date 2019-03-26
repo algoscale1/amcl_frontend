@@ -28,6 +28,7 @@ export class PatientReviewComponent implements OnInit {
     { value: '9' }
   ];
   inch = [
+    { value: '0' },
     { value: '1' }, { value: '2' },
     { value: '3' }, { value: '4' },
     { value: '5' }, { value: '6' },
@@ -53,6 +54,9 @@ export class PatientReviewComponent implements OnInit {
   bloodTest = this.patientService.getBloodTest();
   bloodNum = 1;
   initiatReview = false;
+  cypTest = ['Yes', 'No', 'N/A'];
+  reportedConcern = ['Overactive bladder', 'Insominia', 'Appetite Loss', 'Mood Disorders or Depression', 'Non'];
+  vaccines = ['Influenza Vaccine', 'Pneumococcal Vaccine', 'Herpes Zoster (Shingles) Vaccine', 'MMR Vaccine', 'Tdap Vaccine', 'Hepatits A/B: Optional', 'Non'];
 
   constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private _fb: FormBuilder) {
 
@@ -85,20 +89,26 @@ export class PatientReviewComponent implements OnInit {
       profileImg: [''],
       pre_existing_conditions: [],
       medication_history: [],
+      allergies: [],
       supliment_alcohol_caffiene_intake: [],
       cyp_genetic_test: [],
       self_reported_concerns: [],
+      self_reported_concerns_notes: [],
+      vaccines: [],
+      additional_medications: [],
+      additional_treatment: [],
       is_precription_taken_regularly: [],
       is_smoke: [],
       is_smoke_details: [],
-      is_diabetic: [],
+      is_diabetic: ['yes'],
       blood_test: this._fb.array([
         this._fb.group({
           key: [],
           range: [],
           value: []
         })
-      ])
+      ]),
+      glucose_level: []
     });
 
     // });
@@ -194,14 +204,14 @@ export class PatientReviewComponent implements OnInit {
 
   onUpdate(data) {
 
-    // if (this.profileImg != undefined) {
-    //   data.append('profileImage', this.profileImg);
-    // }
+    if (this.profileImg != undefined) {
+      data.append('profileImage', this.profileImg);
+    }
 
     // console.log(data)
 
-    let bloodT = data;
-    bloodT.blood_test = bloodT.blood_test.map(res => {
+    let formdata = data;
+    formdata.blood_test = formdata.blood_test.map(res => {
       return {
         key: res.key['key'],
         range: res.key['range'],
@@ -209,9 +219,12 @@ export class PatientReviewComponent implements OnInit {
       }
     })
 
-    console.log(bloodT);
+    formdata['name'] = formdata.fname + " " + formdata.lname;
 
-    this.patientService.updatePatient(this.patientId, bloodT).subscribe(
+    console.log(formdata);
+    // this.router.navigate([this.router.url + '/generate_report']);
+
+    this.patientService.updatePatient(this.patientId, formdata).subscribe(
       res => {
         this.snackBar.open(res, '', {
           duration: 2000
@@ -222,6 +235,8 @@ export class PatientReviewComponent implements OnInit {
 
       }
     );
+
+
   };
 
 

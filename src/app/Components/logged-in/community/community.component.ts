@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+
+import { PatientService } from 'src/app/Services/patient.service';
 
 @Component({
   selector: 'app-community',
@@ -7,12 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommunityComponent implements OnInit {
 
-  starsCount1 = 4;
-  starsCount2 = 5;
-  starsCount3 = 5;
-  starsCount4 = 3;
+  starsCount1 = 0;
+  patientList = new MatTableDataSource<any>();
+  displayedColumns: string[] = ['#', 'name', 'dob', 'mtm', 'cmr', 'rating', 'risk', 'interaction'];
+  // dataSource = new MatTableDataSource<any>(this.patientList);
 
-  constructor() { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private patientService: PatientService) {
+
+    let patients = new Promise((resolve, rej) => {
+      this.patientService.getPatientList().subscribe(
+        res => {
+          console.log(res)
+          this.patientList = res;
+          resolve(true);
+        }
+      );
+    });
+
+    patients.then(() => {
+      this.patientList.paginator = this.paginator;
+    })
+  }
 
   ngOnInit() {
   }

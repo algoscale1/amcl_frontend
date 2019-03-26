@@ -4,11 +4,23 @@
 
 .table {
     /* border-style: ridge; */
-    background-color: white;
+    /* background-color: white; */
     width: 100%;
-    box-shadow: 15px 15px #DEDEDE;
+    /* box-shadow: 15px 15px #DEDEDE; */
 }
 
+table {
+    width: 100%;
+}
+
+th{
+    font-size: 24px;
+}
+
+td{
+    font-size: 18px;
+}
+  
 h1{
     color: black;
 }

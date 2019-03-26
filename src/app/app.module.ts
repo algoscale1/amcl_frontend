@@ -8,13 +8,11 @@ import { RatingModule } from "ngx-rating";
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FusionChartsModule } from 'angular-fusioncharts';
 
-// Import FusionCharts library and chart modules
 import * as FusionCharts from 'fusioncharts';
 import * as Widgets from 'fusioncharts/fusioncharts.widgets';
 
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-// Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
 
 import { MaterialModule } from './Angular Material/material.module';
@@ -42,6 +40,7 @@ import { AccountComponent } from './Components/logged-in/account/account.compone
 import { PatientReviewComponent } from './Components/logged-in/med-review/patient-review/patient-review.component';
 import { TokenInterceptor } from './Authentication/interceptor.interceptor';
 import { IndicationListComponent } from './Components/logged-in/med-review/patient-review/indication-list/indication-list.component';
+import { DosageCalculatorComponent } from './Components/logged-in/resources/dosage-calculator/dosage-calculator.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +64,8 @@ import { IndicationListComponent } from './Components/logged-in/med-review/patie
     ErrorComponent,
     AccountComponent,
     PatientReviewComponent,
-    IndicationListComponent
+    IndicationListComponent,
+    DosageCalculatorComponent
   ],
   imports: [
     BrowserModule,
