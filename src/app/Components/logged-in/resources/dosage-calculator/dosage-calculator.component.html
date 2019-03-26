@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-9">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Enter your Weight" [(ngModel)]="weight" (change)="calculate()" type="number">
+            <input matInput placeholder="Enter your Weight" [(ngModel)]="weight" (keyup)="calculate()" type="number">
           </mat-form-field>
         </div>
         <div class="col-md-3">
@@ -16,6 +16,52 @@
             <mat-select [(ngModel)]="weightUnit" (ngModelChange)="weightUnitChange()">
               <mat-option *ngFor="let kg of kg" [value]="kg">
                 {{kg}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter Dosage of your Drug" [(ngModel)]="dosage" (keyup)="calculate()"
+              type="number">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-label>Unit</mat-label>
+            <mat-select [(ngModel)]="dosageUnit" (ngModelChange)="dosageUnitChange()">
+              <mat-option *ngFor="let grams of grams" [value]="grams">
+                {{grams}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-label>Unit</mat-label>
+            <mat-select [(ngModel)]="dosageweightUnit" (ngModelChange)="weightdosageUnitChange()">
+              <mat-option *ngFor="let kg of kg" [value]="kg">
+                {{kg}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <mat-list>
+            <mat-list-item>{{result}}</mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-label>Unit</mat-label>
+            <mat-select [(ngModel)]="resultUnit" (ngModelChange)="resultUnitChange()">
+              <mat-option *ngFor="let grams of grams" [value]="grams">
+                {{grams}}
               </mat-option>
             </mat-select>
           </mat-form-field>
