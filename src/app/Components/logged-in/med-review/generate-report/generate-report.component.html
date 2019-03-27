@@ -63,22 +63,32 @@
     <h3 class="title">Recommendations</h3>
     <div class="report-point">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <mat-form-field>
             <input matInput placeholder="Pharmacist Name">
           </mat-form-field>
         </div>
-        <div class="col-md-6 row">
-          <i class="fa fa-phone-square" aria-hidden="true"></i>
-          <mat-form-field>
+        <div class="col-md-6">
+          <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;
+          <mat-form-field style="width:90%">
             <input matInput placeholder="Contact Pharmacist" type="number">
           </mat-form-field>
         </div>
         <div class="col-md-12" style="margin-top:20px;">
           <div class="form-group">
-            <label> Physician's response :</label>
+            <label> Pharmacist's Notes:</label>
             <textarea rows="2" cols="80" class="form-control" value="prescription"></textarea>
           </div>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <input matInput placeholder="Physician Name">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <input matInput placeholder="Physician Contact" type="number">
+          </mat-form-field>
         </div>
       </div>
     </div>
