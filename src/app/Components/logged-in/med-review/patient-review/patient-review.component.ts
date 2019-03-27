@@ -57,6 +57,7 @@ export class PatientReviewComponent implements OnInit {
   cypTest = ['Yes', 'No', 'N/A'];
   reportedConcern = ['Overactive bladder', 'Insominia', 'Appetite Loss', 'Mood Disorders or Depression', 'None'];
   vaccines = ['Influenza Vaccine', 'Pneumococcal Vaccine', 'Herpes Zoster (Shingles) Vaccine', 'MMR Vaccine', 'Tdap Vaccine', 'Hepatits A/B: Optional', 'None'];
+  option = ['Yes', 'No'];
 
   constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private _fb: FormBuilder) {
 
@@ -97,7 +98,10 @@ export class PatientReviewComponent implements OnInit {
       vaccines: [],
       additional_medications: [],
       additional_treatment: [],
-      is_precription_taken_regularly: [],
+      is_precription_taken_regularly: ['Yes'],
+      recently_hospitalized: ['Yes'],
+      med_filled: ['Yes'],
+      adherence_notes: [],
       is_smoke: [],
       is_smoke_details: [],
       is_diabetic: ['yes'],

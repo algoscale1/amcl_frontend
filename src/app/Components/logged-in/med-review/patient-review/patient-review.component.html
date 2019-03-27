@@ -183,19 +183,51 @@
       </div>
       <div class="register-body">
         <div class="row">
-          <div class="col-md-6" style="padding: 0px 20px">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Is prescription taken regularly ?"
-                formControlName="is_precription_taken_regularly">
-            </mat-form-field>
-          </div>
-          <div class="col-md-6" style="padding: 20px">
-            <label>Diet lifestyle issues :</label>
-            Does the patient smoke?&nbsp;
-            <mat-radio-group class="smoke" formControlName="is_smoke">
-              <mat-radio-button [value]="true">Yes</mat-radio-button>&nbsp;
-              <mat-radio-button [value]="false">No</mat-radio-button>
-            </mat-radio-group>
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <h5 style="margin:0px;">Adherence</h5>
+              <mat-form-field class="example-full-width">
+                <mat-label>Is the prescription taken as prescribed</mat-label>
+                <mat-select formControlName="is_precription_taken_regularly">
+                  <mat-option *ngFor="let option of option" [value]="option">{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Has the patient been recently hospitalized (in the last 30 days)?</mat-label>
+                <mat-select formControlName="recently_hospitalized">
+                  <mat-option *ngFor="let option of option" [value]="option">{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Is the Medication being filled in a timely manner?</mat-label>
+                <mat-select formControlName="med_filled">
+                  <mat-option *ngFor="let option of option" [value]="option">{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Additional Notes" formControlName="adherence_notes">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12" style="padding: 20px">
+              <label>Diet lifestyle issues :</label>
+              Does the patient smoke?&nbsp;
+              <mat-radio-group class="smoke" formControlName="is_smoke">
+                <mat-radio-button [value]="true">Yes</mat-radio-button>&nbsp;
+                <mat-radio-button [value]="false">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <div class="col-md-12" style="padding: 20px">
+              <label>Glucose Level :</label>
+              Is the patient diabetic?&nbsp;
+              <mat-radio-group class="smoke" formControlName="is_diabetic">
+                <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
+                <mat-radio-button value="no">No</mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="glucose level" formControlName="glucose_level">
+              </mat-form-field>
+            </div>
           </div>
           <div class="col-md-6" formArrayName="blood_test" style="padding: 20px">
             <label>Blood Test</label>
@@ -218,17 +250,6 @@
               </div>
             </div>
             <button mat-flat-button color="basic" *ngIf="bloodNum < 10" (click)="addAlias()">Add Test</button>
-          </div>
-          <div class="col-md-6" style="padding: 20px">
-            <label>Glucose Level :</label>
-            Is the patient diabetic?&nbsp;
-            <mat-radio-group class="smoke" formControlName="is_diabetic">
-              <mat-radio-button value="yes">Yes</mat-radio-button>&nbsp;
-              <mat-radio-button value="no">No</mat-radio-button>
-            </mat-radio-group>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="glucose level" formControlName="glucose_level">
-            </mat-form-field>
           </div>
         </div>
       </div>
