@@ -47,7 +47,7 @@
 
         <ng-container matColumnDef="dob">
           <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
-          <td mat-cell *matCellDef="let element"> 1/02/2019 </td>
+          <td mat-cell *matCellDef="let element"> {{element.dob | date: 'dd/MM/yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="mtm">
@@ -74,7 +74,7 @@
 
         <ng-container matColumnDef="interaction">
           <th mat-header-cell *matHeaderCellDef> Last Interaction </th>
-          <td mat-cell *matCellDef="let element"> </td>
+          <td mat-cell *matCellDef="let element"> {{ element.last_interaction | date: 'dd/MM/yyyy'}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
