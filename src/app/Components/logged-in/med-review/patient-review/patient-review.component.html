@@ -141,7 +141,7 @@
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
               <mat-label>Self Reported Concerns</mat-label>
-              <mat-select formControlName="self_reported_concerns">
+              <mat-select formControlName="self_reported_concerns" multiple>
                 <mat-option *ngFor="let concern of reportedConcern" [value]="concern">{{concern}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -163,7 +163,7 @@
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
               <mat-label>Any Vaccines/shot reminders?</mat-label>
-              <mat-select formControlName="vaccines">
+              <mat-select formControlName="vaccines" multiple>
                 <mat-option *ngFor="let vaccine of vaccines" [value]="concern">{{vaccine}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -204,7 +204,7 @@
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
                     <mat-select placeholder="Test Results Type" formControlName="key">
-                      <mat-option *ngFor="let test of bloodTest | async" [value]="test">
+                      <mat-option *ngFor="let test of bloodTest" [value]="test">
                         {{test.key}}[ {{test.range}} ]
                       </mat-option>
                     </mat-select>

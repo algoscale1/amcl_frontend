@@ -51,7 +51,7 @@ export class PatientReviewComponent implements OnInit {
   indicationList = [];
   indications = [];
   drugList = [];
-  bloodTest = this.patientService.getBloodTest();
+  bloodTest = [];
   bloodNum = 1;
   initiatReview = false;
   cypTest = ['Yes', 'No', 'N/A'];
@@ -128,9 +128,17 @@ export class PatientReviewComponent implements OnInit {
         // console.log(this.indicationList)
       }
     );
+
+    this.patientService.getBloodTest().subscribe(
+      res => {
+        this.bloodTest = res;
+      }
+    )
+
   };
 
   getReviewForm() {
+
 
     let firstName: string = this.patientInfo['name'];
     let height: string = this.patientInfo['height'];
@@ -211,13 +219,16 @@ export class PatientReviewComponent implements OnInit {
     // console.log(data)
 
     let formdata = data;
-    formdata.blood_test = formdata.blood_test.map(res => {
-      return {
-        key: res.key['key'],
-        range: res.key['range'],
-        value: res.value
-      }
-    })
+
+    if (data.blood_test[0].key != undefined) {
+      formdata.blood_test = formdata.blood_test.map(res => {
+        return {
+          key: res.key['key'],
+          range: res.key['range'],
+          value: res.value
+        }
+      })
+    }
 
     formdata['name'] = formdata.fname + " " + formdata.lname;
 

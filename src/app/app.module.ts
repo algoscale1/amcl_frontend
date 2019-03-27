@@ -41,6 +41,8 @@ import { PatientReviewComponent } from './Components/logged-in/med-review/patien
 import { TokenInterceptor } from './Authentication/interceptor.interceptor';
 import { IndicationListComponent } from './Components/logged-in/med-review/patient-review/indication-list/indication-list.component';
 import { DosageCalculatorComponent } from './Components/logged-in/resources/dosage-calculator/dosage-calculator.component';
+import { ChangePasswordComponent } from './Components/logged-in/account/change-password/change-password.component';
+import { EditAccountComponent } from './Components/logged-in/account/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { DosageCalculatorComponent } from './Components/logged-in/resources/dosa
     AccountComponent,
     PatientReviewComponent,
     IndicationListComponent,
-    DosageCalculatorComponent
+    DosageCalculatorComponent,
+    ChangePasswordComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +105,7 @@ import { DosageCalculatorComponent } from './Components/logged-in/resources/dosa
       multi: true
     }
   ],
-  entryComponents: [ErrorComponent, SideEffectsComponent],
+  entryComponents: [ErrorComponent, SideEffectsComponent, ChangePasswordComponent, EditAccountComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

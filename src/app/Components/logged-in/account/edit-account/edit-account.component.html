@@ -1,0 +1,17 @@
+<div class="pass-wrapper">
+  <h3 mat-dialog-title>Edit Account</h3>
+  <form [formGroup]="editForm">
+    <div class="pass-wrapper" mat-dialog-content>
+      <mat-form-field>
+        <input matInput placeholder="Enter new Name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Enter New Phone Number" formControlName="phone">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onSubmit(passwordForm.value)">Submit</button>
+    </div>
+  </form>
+</div>

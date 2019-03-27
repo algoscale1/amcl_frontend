@@ -1,3 +1,20 @@
-<p>
-  account works!
-</p>
+<div class="acc-wrapper">
+  <h3>Your Account</h3>
+  <div class="col-md-9 container-fluid">
+    <mat-card>
+      <ul style="list-style-type:none;">
+        <li><b>Name :</b> {{doctorDetails.name}}</li>
+        <mat-divider [inset]="true"></mat-divider>
+        <li><b>Phone number:</b> {{doctorDetails.phone}}</li>
+        <mat-divider [inset]="true"></mat-divider>
+        <li><b>Email address :</b> {{doctorDetails.email}} </li>
+        <mat-divider [inset]="true"></mat-divider>
+      </ul>
+      <div class="buttons">
+        <button mat-flat-button color="primary" class="float-right" (click)="editAccount()">Edit</button>
+        <button mat-flat-button color="warn" class="float-right" style="margin-right:5px;"
+          (click)="changePassword()">Change Password</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

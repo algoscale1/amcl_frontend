@@ -1,0 +1,32 @@
+.acc-wrapper{
+    padding: 20px;
+}
+
+.acc-wrapper mat-card{
+    padding: 30px 30px 30px 10px;
+}
+
+.profile-block{
+    /* border-radius: 10px; */
+    background: #DEDEDE;
+    padding: 10px;
+    margin: auto;
+    width: 80%;
+}
+
+.patient-img{
+    max-width: 100%;
+}
+
+li{
+    margin: 15px 0;
+}
+
+h3{
+    margin-bottom: 1.5rem;
+}
+
+.buttons{
+    width: 100%;
+    display: inline-block;
+}
