@@ -1,0 +1,55 @@
+.result-body{
+    /* border-style: groove; */
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 25px;
+    background-color: rgb(236, 236, 236);
+}
+
+.alert-body{
+    /* border-style: groove; */
+    /* border-radius: 10px; */
+    /* margin-bottom: 20px; */
+    padding: 25px;
+    background-color: white; 
+}
+
+.int-found{
+    display: flex;
+    justify-content: center;
+}
+
+.int-num{
+    display: flex;
+    justify-content: center;
+    font-size: 70px;
+}
+.title{
+    color: red;
+    text-align: center;
+}
+
+.result-exp{
+    background-color: rgb(233, 233, 233);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.result-exp h3{
+    color:red;
+}
+
+.inline{
+    display: inline;
+}
+
+.review-btn{
+    float: right;
+    margin-top: 20px;
+}
+
+.cess{
+    display: inline;
+    color: red;
+}

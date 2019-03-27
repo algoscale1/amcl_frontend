@@ -5,7 +5,7 @@
   </div>
   <h2 class="report-title">Patient Report</h2>
   <div class="card-body col-md-12">
-    <h2 class="title">Summary</h2>
+    <h3 class="title">Summary</h3>
     <div class="summary col-md-12">
       <ul style="list-style-type:circle;" class="row">
         <li class="col-md-4"><b>Name: </b> {{ patientInfo.name }}</li>
@@ -41,6 +41,43 @@
               <p>Previous Score</p>
               <h6>18</h6>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="result-body">
+    <h3 class="title">Alerts</h3>
+    <div class="alert-body">
+      Medication Side effects :<p class="cess"></p><br>
+      Drug-Drug Interactions: <p class="cess"></p><br>
+      Severity: <p class="cess"></p><br>
+      Explanation:<p class="cess"></p><br>
+      Drug-Supplement Interaction : <p class="cess"></p><br>
+      Explanation : <p class="cess"></p><br>
+      Drug-Caffeine-Alcohol Interaction : <p class="cess"></p><br>
+      Explanation: <p class="cess"></p>
+    </div>
+  </div>
+  <div class="report-body col-md-12" id="report-body">
+    <h3 class="title">Recommendations</h3>
+    <div class="report-point">
+      <div class="row">
+        <div class="col-md-5">
+          <mat-form-field>
+            <input matInput placeholder="Pharmacist Name">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 row">
+          <i class="fa fa-phone-square" aria-hidden="true"></i>
+          <mat-form-field>
+            <input matInput placeholder="Contact Pharmacist" type="number">
+          </mat-form-field>
+        </div>
+        <div class="col-md-12" style="margin-top:20px;">
+          <div class="form-group">
+            <label> Physician's response :</label>
+            <textarea rows="2" cols="80" class="form-control" value="prescription"></textarea>
           </div>
         </div>
       </div>

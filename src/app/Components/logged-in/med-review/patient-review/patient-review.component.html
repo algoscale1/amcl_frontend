@@ -164,7 +164,7 @@
             <mat-form-field class="example-full-width">
               <mat-label>Any Vaccines/shot reminders?</mat-label>
               <mat-select formControlName="vaccines" multiple>
-                <mat-option *ngFor="let vaccine of vaccines" [value]="concern">{{vaccine}}</mat-option>
+                <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine">{{vaccine}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>

@@ -12,6 +12,7 @@ export class GenerateReportComponent implements OnInit {
 
   patientId = '';
   patientInfo = [];
+  interactions: [];
   test = [];
 
   constructor(private patientService: PatientService, private route: ActivatedRoute) { }
@@ -20,9 +21,10 @@ export class GenerateReportComponent implements OnInit {
 
     this.patientId = this.route.snapshot.paramMap.get('id');
     let blood_test = new Promise((resolve, rej) => {
-      this.patientService.getPatient(this.patientId).subscribe(
+      this.patientService.generateReport(this.patientId).subscribe(
         res => {
-          this.patientInfo = res;
+          this.patientInfo = res['patient_details'];
+          this.interactions = res['interaction'];
           console.log(this.patientInfo);
           resolve(true);
         }

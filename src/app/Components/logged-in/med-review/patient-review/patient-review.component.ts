@@ -55,8 +55,8 @@ export class PatientReviewComponent implements OnInit {
   bloodNum = 1;
   initiatReview = false;
   cypTest = ['Yes', 'No', 'N/A'];
-  reportedConcern = ['Overactive bladder', 'Insominia', 'Appetite Loss', 'Mood Disorders or Depression', 'Non'];
-  vaccines = ['Influenza Vaccine', 'Pneumococcal Vaccine', 'Herpes Zoster (Shingles) Vaccine', 'MMR Vaccine', 'Tdap Vaccine', 'Hepatits A/B: Optional', 'Non'];
+  reportedConcern = ['Overactive bladder', 'Insominia', 'Appetite Loss', 'Mood Disorders or Depression', 'None'];
+  vaccines = ['Influenza Vaccine', 'Pneumococcal Vaccine', 'Herpes Zoster (Shingles) Vaccine', 'MMR Vaccine', 'Tdap Vaccine', 'Hepatits A/B: Optional', 'None'];
 
   constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private _fb: FormBuilder) {
 
@@ -249,7 +249,5 @@ export class PatientReviewComponent implements OnInit {
 
 
   };
-
-
 
 }

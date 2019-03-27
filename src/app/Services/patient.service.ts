@@ -71,4 +71,10 @@ export class PatientService {
     )
   };
 
+  generateReport(id) {
+    return this.http.get(`${environment.API_url}/patient/get/${id}?report=true`).pipe(
+      map(res => res['data'])
+    )
+  };
+
 }
