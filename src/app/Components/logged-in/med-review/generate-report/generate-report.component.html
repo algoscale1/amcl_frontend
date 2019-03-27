@@ -27,6 +27,23 @@
   <div class="col-md-12 gauge-body">
     <h4 class="text-center">Blood Test Result</h4>
     <div class="row">
+      <div class="col-md-3">
+        <div class="disease-gauge">
+          <div class="outer">
+            <fusioncharts width="250" height="190" type="hlineargauge" [dataSource]="glucose_level"></fusioncharts>
+          </div>
+          <div class="row">
+            <div class="col-md-6 gauge-value">
+              <p>Normal Range</p>
+              <h6>60 - 120</h6>
+            </div>
+            <div class="col-md-6 gauge-value">
+              <p>Previous Score</p>
+              <h6>18</h6>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-md-3" *ngFor="let test of test">
         <div class="disease-gauge">
           <div class="outer">
@@ -49,14 +66,22 @@
   <div class="result-body">
     <h3 class="title">Alerts</h3>
     <div class="alert-body">
-      Medication Side effects :<p class="cess"></p><br>
-      Drug-Drug Interactions: <p class="cess"></p><br>
-      Severity: <p class="cess"></p><br>
-      Explanation:<p class="cess"></p><br>
-      Drug-Supplement Interaction : <p class="cess"></p><br>
-      Explanation : <p class="cess"></p><br>
-      Drug-Caffeine-Alcohol Interaction : <p class="cess"></p><br>
-      Explanation: <p class="cess"></p>
+      Pre-existing conditions : <label class="cess"
+        *ngFor="let indication of patientInfo.pre_existing_conditions">{{indication.indication}},&nbsp;</label><br>
+      List of medications : <label class="cess" *ngFor="let med of patientInfo.medication_history">(Ndc: {{med.ndc}}
+        ){{med.brand_name}},&nbsp;</label>
+      Drug-Drug Interactions: <p class="cess" *ngIf="interactions">No Interaction was Found</p><br>
+      Severity: <p class="cess" *ngIf="interactions">None</p><br>
+      Explanation:<p class="cess" *ngIf="interactions">None</p><br>
+      Allergies : <p class="cess">{{patientInfo.allergies}}</p><br>
+      Supplement, Alcohol, Caffeine intake : <label
+        class="cess">{{patientInfo.supliment_alcohol_caffiene_intake}}</label><br>
+      Vaccines : <label class="cess" *ngFor="let vaccines of patientInfo.vaccines">{{vaccines}},&nbsp;</label><br>
+      Self Reported Concerns : <p class="cess">
+        {{patientInfo.self_reported_concerns}}{{patientInfo.self_reported_concerns_notes}}</p><br>
+      Adherence : <p class="cess">None</p><br>
+      CYP Genetic Test Results : <p class="cess">{{patientInfo.cyp_genetic_test}}</p><br>
+      Glucose Test Result Means: <p class="cess">{{glucose_level_means}}</p>
     </div>
   </div>
   <div class="report-body col-md-12" id="report-body">

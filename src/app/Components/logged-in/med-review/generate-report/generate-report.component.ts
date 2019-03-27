@@ -14,6 +14,9 @@ export class GenerateReportComponent implements OnInit {
   patientInfo = [];
   interactions: [];
   test = [];
+  glucose_value;
+  glucose_level;
+  glucose_level_means = '';
 
   constructor(private patientService: PatientService, private route: ActivatedRoute) { }
 
@@ -25,7 +28,9 @@ export class GenerateReportComponent implements OnInit {
         res => {
           this.patientInfo = res['patient_details'];
           this.interactions = res['interaction'];
+          this.glucose_value = parseFloat(this.patientInfo['glucose_level']);
           console.log(this.patientInfo);
+          console.log(this.interactions)
           resolve(true);
         }
       );
@@ -96,10 +101,84 @@ export class GenerateReportComponent implements OnInit {
             }]
           }
         });
+
       });
 
-      // console.log(this.test)
+      this.glucose_level = {
+        "chart": {
+          "theme": "fusion",
+          "caption": "Glucose Level",
+          "lowerLimit": 0,
+          "upperLimit": 180,
+          // "numberSuffix": "%",
+          "chartBottomMargin": "20",
+          "valueFontSize": "11",
+          "valueFontBold": "0"
+        },
+        // Gauge Data
+        "colorRange": {
+          "color": [
+            {
+              "minValue": 0,
+              "maxValue": 60,
+              "label": "Low",
+            },
+            {
+              "minValue": 60,
+              "maxValue": 120,
+              "label": "Moderate",
+            },
+            {
+              "minValue": 120,
+              "maxValue": 180,
+              "label": "High",
+            }
+          ]
+        },
+        "pointers": {
+          "pointer": [{
+            "value": this.glucose_value
+          }]
+        },
+        "annotations": {
+          "origw": "400",
+          "origh": "190",
+          "autoscale": "1",
+          "groups": [{
+            "id": "range",
+            "items": [{
+              "id": "rangeBg",
+              "type": "rectangle",
+              "x": "$chartCenterX-115",
+              "y": "$chartEndY-35",
+              "tox": "$chartCenterX +115",
+              "toy": "$chartEndY-15",
+              "fillcolor": "#0075c2"
+            },
+            ]
+          }]
+        }
+      };
+
+      if (this.glucose_value <= 60) {
+        this.glucose_level_means = 'Hypoglycemic(Low blood glucose)';
+      }
+      else if (this.glucose_value > 60 && this.glucose_value <= 80) {
+        this.glucose_level_means = 'Below Normal';
+      }
+      else if (this.glucose_value > 80 && this.glucose_value <= 100) {
+        this.glucose_level_means = 'Normal';
+      }
+      else if (this.glucose_value > 100 && this.glucose_value <= 120) {
+        this.glucose_level_means = 'Above Normal';
+      }
+      else if (this.glucose_value > 120) {
+        this.glucose_level_means = 'Hyperglycemic(High blood glucose)';
+      }
+
     })
 
   }
+
+
 }
