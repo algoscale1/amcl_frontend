@@ -132,7 +132,8 @@
                 </mat-form-field>
                 <mat-option (onSelectionChange)="onSelectDrug($event.source)"
                   *ngFor="let med of drugList | filters:search_med:'brand_name'" [value]="med">
-                  (Ndc: {{med.ndc}}) {{med.brand_name}}
+                  (Ndc: {{med.ndc}}) {{med.brand_name}} (Manufacturer: {{med.manufacterer}}) (Dosage:
+                  <label *ngFor="let dosage of med.doses"> {{dosage}})</label>
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -143,10 +144,15 @@
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Supplement, Alcohol, Caffeine intake"
-                formControlName="supliment_alcohol_caffiene_intake">
-            </mat-form-field>
+            <!-- <mat-form-field> -->
+            <!-- <label *ngFor="let sup of supplement">{{sup}}</label> -->
+            <!-- <mat-chip-list aria-label="Supplement, Alcohol, Caffeine intake" style="padding:5px;"
+              formControlName="supliment_alcohol_caffiene_intake"> -->
+            <label>Supplement, Alcohol, Caffeine intake</label>
+            <br>
+            <label style="color:blue;" *ngFor="let sup of supplement">{{sup}}&nbsp;</label>
+            <!-- </mat-chip-list> -->
+            <!-- </mat-form-field> -->
           </div>
           <div class="col-md-6">
             <mat-form-field class="example-full-width">

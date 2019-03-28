@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 
 import { PatientService } from 'src/app/Services/patient.service';
+import { SupplemetsComponent } from './supplemets/supplemets.component';
 
 @Component({
   selector: 'app-patient-review',
@@ -60,8 +61,9 @@ export class PatientReviewComponent implements OnInit {
   option = ['Yes', 'No'];
   search_cond = '';
   search_med = '';
+  supplement = [];
 
-  constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private _fb: FormBuilder) {
+  constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private _fb: FormBuilder, public dialog: MatDialog) {
 
     // let getPatient = new Promise((resolve, rej) => {
 
@@ -218,9 +220,42 @@ export class PatientReviewComponent implements OnInit {
   };
 
   onSelectDrug(event) {
-    console.log(event);
+    // console.log(this.patientForm);
 
-    if (event._selected) { }
+    if (event._selected) {
+
+      if (event.value.food_interaction_questions) {
+
+        const dialogRef = this.dialog.open(SupplemetsComponent, {
+          width: '450px',
+          data: event.value.food_interaction_questions
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+
+          if (result == 'yes') {
+            this.supplement.push(event.value.food_int_answer);
+            // console.log(this.supplement)
+            this.patientForm.controls['supliment_alcohol_caffiene_intake'].setValue(this.supplement);
+            // console.log(this.patientForm['supliment_alcohol_caffiene_intake'])
+          }
+        });
+
+      }
+    }
+
+    else if (!event._selected) {
+
+      if (event.value.food_interaction_questions) {
+        let index = this.supplement.indexOf(event.value.food_int_answer);
+        if (index > -1) {
+          this.supplement.splice(index, 1);
+        }
+        this.patientForm.controls['supliment_alcohol_caffiene_intake'].setValue(this.supplement);
+        // console.log(this.patientForm['supliment_alcohol_caffiene_intake'])
+      }
+    }
+
   };
 
   onUpdate(data) {
@@ -228,8 +263,6 @@ export class PatientReviewComponent implements OnInit {
     if (this.profileImg != undefined) {
       data.append('profileImage', this.profileImg);
     }
-
-    // console.log(data)
 
     let formdata = data;
 
@@ -244,8 +277,13 @@ export class PatientReviewComponent implements OnInit {
     }
 
     formdata['name'] = formdata.fname + " " + formdata.lname;
+    formdata['height'] = formdata.heightFt + "." + formdata.heightIn;
+    for (let i = 0; i < formdata['medication_history'].length; i++) {
+      formdata['medication_history'][i] = formdata['medication_history'][i]._id;
+    }
+    console.log(formdata)
 
-    console.log(formdata);
+
     // this.router.navigate([this.router.url + '/generate_report']);
 
     this.patientService.updatePatient(this.patientId, formdata).subscribe(

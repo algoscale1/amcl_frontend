@@ -69,8 +69,9 @@
     <div class="alert-body">
       Pre-existing conditions : <label class="cess"
         *ngFor="let indication of patientInfo.pre_existing_conditions">{{indication.indication}},&nbsp;</label><br>
-      List of medications : <label class="cess" *ngFor="let med of patientInfo.medication_history">(Ndc: {{med.ndc}}
-        ){{med.brand_name}},&nbsp;</label><br>
+      List of medications : <label class="cess" *ngFor="let med of patientInfo.medication_history">(Ndc: {{med.ndc}})
+        {{med.brand_name}} (Manufacturer: {{med.manufacterer}}) (Dosage:
+        <label *ngFor="let dosage of med.doses"> {{dosage}}),</label>&nbsp;</label><br>
       Drug-Drug Interactions: <p class="cess" *ngIf="interactions">No Interaction was Found</p><br>
       Severity: <p class="cess" *ngIf="interactions">None</p><br>
       Explanation:<p class="cess" *ngIf="interactions">None</p><br>
