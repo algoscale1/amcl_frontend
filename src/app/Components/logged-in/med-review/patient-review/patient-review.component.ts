@@ -218,7 +218,9 @@ export class PatientReviewComponent implements OnInit {
   };
 
   onSelectDrug(event) {
-    console.log(event)
+    console.log(event);
+
+    if (event._selected) { }
   };
 
   onUpdate(data) {

@@ -70,7 +70,7 @@
       Pre-existing conditions : <label class="cess"
         *ngFor="let indication of patientInfo.pre_existing_conditions">{{indication.indication}},&nbsp;</label><br>
       List of medications : <label class="cess" *ngFor="let med of patientInfo.medication_history">(Ndc: {{med.ndc}}
-        ){{med.brand_name}},&nbsp;</label>
+        ){{med.brand_name}},&nbsp;</label><br>
       Drug-Drug Interactions: <p class="cess" *ngIf="interactions">No Interaction was Found</p><br>
       Severity: <p class="cess" *ngIf="interactions">None</p><br>
       Explanation:<p class="cess" *ngIf="interactions">None</p><br>
@@ -89,6 +89,12 @@
     <h3 class="title">Recommendations</h3>
     <div class="report-point">
       <div class="row">
+        <div class="result-exp col-md-12">
+          <div>
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            What a diabetic should do: <p class="cess">{{diabetic_do}}</p>
+          </div>
+        </div>
         <div class="col-md-6">
           <mat-form-field>
             <input matInput placeholder="Pharmacist Name">

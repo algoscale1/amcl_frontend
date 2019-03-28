@@ -130,7 +130,7 @@
                   <input matInput placeholder="Search..." [(ngModel)]="search_med"
                     [ngModelOptions]="{standalone: true}">
                 </mat-form-field>
-                <mat-option (onSelectionChange)="onSelectDrug($event)"
+                <mat-option (onSelectionChange)="onSelectDrug($event.source)"
                   *ngFor="let med of drugList | filters:search_med:'brand_name'" [value]="med">
                   (Ndc: {{med.ndc}}) {{med.brand_name}}
                 </mat-option>

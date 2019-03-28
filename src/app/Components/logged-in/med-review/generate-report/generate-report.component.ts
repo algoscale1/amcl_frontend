@@ -17,6 +17,7 @@ export class GenerateReportComponent implements OnInit {
   glucose_value;
   glucose_level;
   glucose_level_means = '';
+  diabetic_do = '';
 
   constructor(private patientService: PatientService, private route: ActivatedRoute) { }
 
@@ -162,18 +163,23 @@ export class GenerateReportComponent implements OnInit {
 
       if (this.glucose_value <= 60) {
         this.glucose_level_means = 'Hypoglycemic(Low blood glucose)';
+        this.diabetic_do = 'Eat food with 5-10 grams fast acting carbohydrate';
       }
       else if (this.glucose_value > 60 && this.glucose_value <= 80) {
         this.glucose_level_means = 'Below Normal';
+        this.diabetic_do = 'Eat food with 5 grams carbohydrate';
       }
       else if (this.glucose_value > 80 && this.glucose_value <= 100) {
         this.glucose_level_means = 'Normal';
+        this.diabetic_do = 'Do Nothing';
       }
       else if (this.glucose_value > 100 && this.glucose_value <= 120) {
         this.glucose_level_means = 'Above Normal';
+        this.diabetic_do = 'Excercise or take insulin';
       }
       else if (this.glucose_value > 120) {
         this.glucose_level_means = 'Hyperglycemic(High blood glucose)';
+        this.diabetic_do = 'Take insulin';
       }
 
     })
