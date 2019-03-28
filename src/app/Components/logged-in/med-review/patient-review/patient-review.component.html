@@ -112,7 +112,12 @@
             <mat-form-field>
               <mat-select placeholder="Pre-existing Conditions" formControlName="pre_existing_conditions"
                 (ngModelChange)="onselectIndication()" multiple>
-                <mat-option *ngFor="let indication of indicationList" [value]="indication._id">
+                <mat-form-field>
+                  <input matInput placeholder="Search Pre-existing Conditions" [(ngModel)]="search_cond"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <mat-option *ngFor="let indication of indicationList | filters:search_cond:'indication' "
+                  [value]="indication._id">
                   {{indication.indication}}
                 </mat-option>
               </mat-select>
@@ -121,7 +126,12 @@
           <div class="col-md-6">
             <mat-form-field>
               <mat-select placeholder="Medication history" formControlName="medication_history" multiple>
-                <mat-option *ngFor="let med of drugList" [value]="med._id">
+                <mat-form-field>
+                  <input matInput placeholder="Search Medication history" [(ngModel)]="search_med"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <mat-option *ngFor="let med of drugList | filters:search_med:'brand_name'" [value]="med._id"
+                  (ngModelChange)="onSelectDrug(med)">
                   (Ndc: {{med.ndc}}) {{med.brand_name}}
                 </mat-option>
               </mat-select>
@@ -225,7 +235,7 @@
                 <mat-radio-button value="no">No</mat-radio-button>
               </mat-radio-group>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="glucose level" formControlName="glucose_level" type="number">
+                <input matInput placeholder="Blood Glucose Level(mg/dL)" formControlName="glucose_level" type="number">
               </mat-form-field>
             </div>
           </div>

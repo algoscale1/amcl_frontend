@@ -39,10 +39,11 @@ import { ErrorComponent } from './Components/log-in/error/error.component';
 import { AccountComponent } from './Components/logged-in/account/account.component';
 import { PatientReviewComponent } from './Components/logged-in/med-review/patient-review/patient-review.component';
 import { TokenInterceptor } from './Authentication/interceptor.interceptor';
-import { IndicationListComponent } from './Components/logged-in/med-review/patient-review/indication-list/indication-list.component';
 import { DosageCalculatorComponent } from './Components/logged-in/resources/dosage-calculator/dosage-calculator.component';
 import { ChangePasswordComponent } from './Components/logged-in/account/change-password/change-password.component';
 import { EditAccountComponent } from './Components/logged-in/account/edit-account/edit-account.component';
+import { FiltersPipe } from './Components/logged-in/med-review/patient-review/filters.pipe';
+import { SupplemetsComponent } from './Components/logged-in/med-review/patient-review/supplemets/supplemets.component';
 
 @NgModule({
   declarations: [
@@ -66,10 +67,11 @@ import { EditAccountComponent } from './Components/logged-in/account/edit-accoun
     ErrorComponent,
     AccountComponent,
     PatientReviewComponent,
-    IndicationListComponent,
     DosageCalculatorComponent,
     ChangePasswordComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    FiltersPipe,
+    SupplemetsComponent
   ],
   imports: [
     BrowserModule,

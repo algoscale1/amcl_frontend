@@ -58,6 +58,8 @@ export class PatientReviewComponent implements OnInit {
   reportedConcern = ['Overactive bladder', 'Insominia', 'Appetite Loss', 'Mood Disorders or Depression', 'None'];
   vaccines = ['Influenza Vaccine', 'Pneumococcal Vaccine', 'Herpes Zoster (Shingles) Vaccine', 'MMR Vaccine', 'Tdap Vaccine', 'Hepatits A/B: Optional', 'None'];
   option = ['Yes', 'No'];
+  search_cond = '';
+  search_med = '';
 
   constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private _fb: FormBuilder) {
 
@@ -129,6 +131,7 @@ export class PatientReviewComponent implements OnInit {
     this.patientService.getAllIndication().subscribe(
       res => {
         this.indicationList = res;
+        this.indicationList.shift();
         // console.log(this.indicationList)
       }
     );
