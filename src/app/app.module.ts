@@ -107,7 +107,7 @@ import { SupplemetsComponent } from './Components/logged-in/med-review/patient-r
       multi: true
     }
   ],
-  entryComponents: [ErrorComponent, SideEffectsComponent, ChangePasswordComponent, EditAccountComponent],
+  entryComponents: [ErrorComponent, SideEffectsComponent, ChangePasswordComponent, EditAccountComponent, SupplemetsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

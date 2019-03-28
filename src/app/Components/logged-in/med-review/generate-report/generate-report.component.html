@@ -25,25 +25,26 @@
     </div>
   </div>
   <div class="col-md-12 gauge-body">
-    <h4 class="text-center">Blood Test Result</h4>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="disease-gauge">
-          <div class="outer">
-            <fusioncharts width="250" height="190" type="hlineargauge" [dataSource]="glucose_level"></fusioncharts>
-          </div>
-          <div class="row">
-            <div class="col-md-6 gauge-value">
-              <p>Normal Range</p>
-              <h6>60 - 120</h6>
-            </div>
-            <div class="col-md-6 gauge-value">
-              <p>Previous Score</p>
-              <h6>18</h6>
-            </div>
-          </div>
+    <h4 class="text-center">Blood Glucose Level Result</h4>
+    <div class="disease-gauge">
+      <div class="outer">
+        <fusioncharts width="450" height="190" type="hlineargauge" [dataSource]="glucose_level"></fusioncharts>
+      </div>
+      <div class="row">
+        <div class="col-md-6 gauge-value" style="text-align:right;padding: 0 20px;">
+          <p>Normal Range</p>
+          <h6>60 - 120</h6>
+        </div>
+        <div class="col-md-6 gauge-value" style="text-align:left;padding: 0 20px;">
+          <p>Previous Score</p>
+          <h6>18</h6>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="col-md-12 gauge-body">
+    <h4 class="text-center">Blood Test Result</h4>
+    <div class="row">
       <div class="col-md-3" *ngFor="let test of test">
         <div class="disease-gauge">
           <div class="outer">

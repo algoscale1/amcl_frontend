@@ -217,6 +217,10 @@ export class PatientReviewComponent implements OnInit {
     )
   };
 
+  onSelectDrug(event) {
+    console.log(event)
+  };
+
   onUpdate(data) {
 
     if (this.profileImg != undefined) {
